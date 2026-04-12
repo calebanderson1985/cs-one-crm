@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Core\Auth;
 use App\Core\View;
 use App\Models\LoginAttempt;
+use App\Models\Company;
 use App\Models\User;
 
 class AuthController {
@@ -27,7 +28,7 @@ class AuthController {
 
             $model = new User($this->db);
             $user = $model->findByEmail($email);
-            if ($user && !empty($user['is_active']) && password_verify($password, $user['password_hash'])) {
+            if ($user && !empty($user['is_active']) && (new Company($this->db))->isActive((int)($user['company_id'] ?? 0)) && password_verify($password, $user['password_hash'])) {
                 $attempts->record($email, $ip, true, (int)$user['id']);
                 $attempts->clearFailures($email, $ip);
                 Auth::attempt($user);
@@ -37,7 +38,7 @@ class AuthController {
 
             $attempts->record($email, $ip, false, $user ? (int)$user['id'] : null);
             audit_log($this->db, 'auth', 'login_failed', $user ? (int)$user['id'] : null, 'Failed login attempt for ' . $email);
-            $error = 'Invalid credentials or inactive user.';
+            $error = 'Invalid credentials, inactive user, or suspended company.';
             View::render('auth/login', compact('error'));
             return;
         }

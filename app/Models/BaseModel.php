@@ -9,7 +9,7 @@ class BaseModel {
     protected array $tenantScopedTables = [
         'users','clients','leads','deals','communications','tasks','commissions','documents','audit_logs',
         'notifications','workflows','workflow_runs','workflow_queue','role_permissions','communication_templates',
-        'outbound_messages','ai_logs','api_tokens','onboarding_steps','webhook_events'
+        'outbound_messages','ai_logs','api_tokens','onboarding_steps','webhook_events','support_tickets'
     ];
 
     protected array $ownerColumns = [
@@ -24,6 +24,7 @@ class BaseModel {
         'notifications' => 'user_id',
         'audit_logs' => 'user_id',
         'ai_logs' => 'user_id',
+        'support_tickets' => 'owner_user_id',
     ];
 
     public function __construct(PDO $db) {
