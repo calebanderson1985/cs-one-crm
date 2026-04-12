@@ -14,6 +14,12 @@ class ApiRequestLog extends BaseModel {
         return $stmt->fetch() ?: ['total_requests'=>0,'error_requests'=>0,'last_request_at'=>null];
     }
 
+    public function scopeSummary(): array {
+        $stmt = $this->db->prepare('SELECT COALESCE(scope_text, "legacy") AS scope_text, COUNT(*) AS request_count FROM api_request_logs WHERE company_id = ? GROUP BY COALESCE(scope_text, "legacy") ORDER BY request_count DESC');
+        $stmt->execute([current_company_id()]);
+        return $stmt->fetchAll();
+    }
+
     public function log(array $data): void {
         $stmt = $this->db->prepare('INSERT INTO api_request_logs (company_id, api_token_id, resource_name, http_method, status_code, request_path, ip_address, scope_text, created_at) VALUES (?,?,?,?,?,?,?,?,NOW())');
         $stmt->execute([

@@ -14,6 +14,13 @@ class OnboardingController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             verify_csrf();
             Auth::requirePermission('onboarding', 'edit');
+            $action = (string)($_POST['action'] ?? 'toggle');
+            if ($action === 'create_step') {
+                $id = $model->create($_POST);
+                audit_log($this->db, 'onboarding', 'create', $id, 'Custom launch wizard step created');
+                flash('success', 'Custom step added.');
+                redirect('index.php?page=onboarding');
+            }
             $id = (int)($_POST['id'] ?? 0);
             $complete = !empty($_POST['is_complete']);
             $model->complete($id, $complete);

@@ -57,6 +57,11 @@ function verify_csrf(): void {
     }
 }
 
+function client_ip(): ?string {
+    $value = $_SERVER['REMOTE_ADDR'] ?? null;
+    return $value ? substr((string) $value, 0, 45) : null;
+}
+
 function current_company_id(): int {
     if (!empty($_SESSION['impersonated_company_id'])) {
         return (int) $_SESSION['impersonated_company_id'];
@@ -186,10 +191,9 @@ function audit_log(PDO $db, string $module, string $action, ?int $recordId = nul
         $action,
         $recordId,
         $summary,
-        $_SERVER['REMOTE_ADDR'] ?? null,
+        client_ip(),
     ]);
 }
-
 
 function current_base_company_id(): int {
     return (int) ($_SESSION['user']['company_id'] ?? 1);

@@ -35,6 +35,9 @@ class SettingsController {
                 'billing_checkout_success_url' => $_POST['billing_checkout_success_url'] ?? '',
                 'billing_checkout_cancel_url' => $_POST['billing_checkout_cancel_url'] ?? '',
                 'login_rate_limit' => $_POST['login_rate_limit'] ?? '5',
+                'login_rate_window_minutes' => $_POST['login_rate_window_minutes'] ?? '15',
+                'stripe_webhook_tolerance_seconds' => $_POST['stripe_webhook_tolerance_seconds'] ?? '300',
+                'stripe_webhook_require_verification' => $_POST['stripe_webhook_require_verification'] ?? '0',
             ]);
             audit_log($this->db, 'settings', 'update', null, 'System settings updated');
             flash('success', 'Settings saved.');
