@@ -7,6 +7,7 @@ if (!isset($pdo)) {
 }
 
 use App\Services\StripeService;
+use App\Models\WebhookEvent;
 
 $stripe = new StripeService($pdo);
 $action = $_GET['action'] ?? 'webhook';

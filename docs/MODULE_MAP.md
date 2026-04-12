@@ -163,3 +163,9 @@ This file maps every supplied module from the uploaded zip into the consolidated
 - **Workflow Engine V24** — `caring-sharing-workflow-engine-v24`
 - **Workflow Executor V41** — `caring-sharing-workflow-executor-v41`
 
+
+
+## Phase 12 Operational Modules
+- Webhook Events -> Administration / Integrations
+- Queue Operations -> Administration / Operations
+- Diagnostics -> Administration / Deployment

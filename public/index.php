@@ -30,6 +30,9 @@ use App\Controllers\SettingsController;
 use App\Controllers\TaskController;
 use App\Controllers\UserController;
 use App\Controllers\WorkflowController;
+use App\Controllers\WebhookEventController;
+use App\Controllers\QueueOpsController;
+use App\Controllers\DiagnosticsController;
 
 $page = $_GET['page'] ?? 'dashboard';
 
@@ -62,6 +65,9 @@ $routes = [
     'onboarding' => [OnboardingController::class, 'index'],
     'api_analytics' => [ApiAnalyticsController::class, 'index'],
     'company_switch' => [CompanySwitchController::class, 'index'],
+    'webhooks' => [WebhookEventController::class, 'index'],
+    'queue_ops' => [QueueOpsController::class, 'index'],
+    'diagnostics' => [DiagnosticsController::class, 'index'],
 ];
 
 if (!isset($routes[$page])) {

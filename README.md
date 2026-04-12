@@ -1,8 +1,8 @@
-# CS One CRM - Phase 11 Repo
+# CS One CRM - Phase 12 Repo
 
 CS One CRM is a standalone PHP, HTML5, and MySQL multi-tenant CRM scaffold that consolidates CRM Core, communications, commissions, reporting, workflows, AI tools, portals, and SaaS operations into one installable application.
 
-## Phase 11 highlights
+## Phase 12 highlights
 - Scoped API token center with create, rotate, revoke, and last-used tracking
 - Stronger API auth with bearer tokens, resource scopes, and write-field whitelisting
 - Onboarding launch wizard for go-live readiness
@@ -39,7 +39,7 @@ Use `public/health.php` for a simple JSON health response.
 - Additional migration coverage
 
 
-## Phase 11 additions
+## Phase 12 additions
 
 - Login rate limiting with configurable window and audit logging
 - Signed checkout preview scaffold and stronger Stripe-style webhook verification

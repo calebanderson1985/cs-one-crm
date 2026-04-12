@@ -31,3 +31,11 @@ Run the worker every minute or five minutes depending on volume:
 ```bash
 php cron/worker.php
 ```
+
+
+## Phase 12 Deployment Notes
+
+- Set `api_rate_limit_per_minute` in System Settings before exposing the API externally.
+- Review password policy settings before first user import.
+- Use the Diagnostics page after install to verify runtime readiness.
+- Review Webhook Events after test deliveries to confirm verification and processing status.
