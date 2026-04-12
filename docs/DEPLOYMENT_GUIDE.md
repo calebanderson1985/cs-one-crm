@@ -24,3 +24,9 @@ The worker now records a heartbeat in `worker_heartbeats`, which the Ops Console
 
 ## Maintenance
 Use the Maintenance Center in the app or automate cleanups later with a cron wrapper around application logic.
+
+
+## Phase 14 additions
+- Support Center
+- Audit filters and CSV export
+- Company suspension/reactivation controls

@@ -36,6 +36,7 @@ use App\Controllers\DiagnosticsController;
 use App\Controllers\AnnouncementController;
 use App\Controllers\MaintenanceController;
 use App\Controllers\OpsConsoleController;
+use App\Controllers\SupportController;
 
 $page = $_GET['page'] ?? 'dashboard';
 
@@ -74,6 +75,7 @@ $routes = [
     'announcements' => [AnnouncementController::class, 'index'],
     'maintenance' => [MaintenanceController::class, 'index'],
     'ops_console' => [OpsConsoleController::class, 'index'],
+    'support' => [SupportController::class, 'index'],
 ];
 
 if (!isset($routes[$page])) {

@@ -424,3 +424,21 @@ CREATE TABLE IF NOT EXISTS worker_heartbeats (
   UNIQUE KEY uq_worker_company_name (company_id, worker_name),
   KEY idx_worker_heartbeats_company (company_id, heartbeat_at)
 );
+
+CREATE TABLE IF NOT EXISTS support_tickets (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    company_id INT NOT NULL,
+    title VARCHAR(190) NOT NULL,
+    category_name VARCHAR(100) NOT NULL DEFAULT 'General',
+    priority_name VARCHAR(30) NOT NULL DEFAULT 'Normal',
+    status_name VARCHAR(30) NOT NULL DEFAULT 'Open',
+    owner_user_id INT NULL,
+    detail_text TEXT NULL,
+    created_by INT NULL,
+    resolved_at DATETIME NULL,
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
+    INDEX idx_support_company (company_id),
+    INDEX idx_support_status (status_name),
+    INDEX idx_support_owner (owner_user_id)
+);

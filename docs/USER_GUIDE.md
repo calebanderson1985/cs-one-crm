@@ -20,3 +20,9 @@ Use **Administration → Ops Console** to:
 
 ## Existing modules
 Phase 13 keeps all Phase 12 CRM, workflow, billing scaffold, webhook, diagnostics, queue, and API features intact.
+
+
+## Phase 14 additions
+- Support Center
+- Audit filters and CSV export
+- Company suspension/reactivation controls
