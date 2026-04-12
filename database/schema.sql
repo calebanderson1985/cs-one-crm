@@ -435,10 +435,42 @@ CREATE TABLE IF NOT EXISTS support_tickets (
     owner_user_id INT NULL,
     detail_text TEXT NULL,
     created_by INT NULL,
+    sla_policy_id INT NULL,
+    response_due_at DATETIME NULL,
+    resolution_due_at DATETIME NULL,
     resolved_at DATETIME NULL,
     created_at DATETIME NOT NULL,
     updated_at DATETIME NOT NULL,
     INDEX idx_support_company (company_id),
     INDEX idx_support_status (status_name),
     INDEX idx_support_owner (owner_user_id)
+);
+
+
+CREATE TABLE IF NOT EXISTS sla_policies (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    company_id INT NOT NULL,
+    policy_name VARCHAR(190) NOT NULL,
+    target_scope VARCHAR(100) DEFAULT 'General',
+    response_minutes INT NOT NULL DEFAULT 60,
+    resolution_minutes INT NOT NULL DEFAULT 480,
+    is_active TINYINT(1) NOT NULL DEFAULT 1,
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
+    INDEX idx_sla_company (company_id)
+);
+
+CREATE TABLE IF NOT EXISTS knowledge_base_articles (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    company_id INT NOT NULL,
+    title VARCHAR(190) NOT NULL,
+    category_name VARCHAR(120) DEFAULT 'General',
+    visibility_scope VARCHAR(40) NOT NULL DEFAULT 'internal',
+    body_text MEDIUMTEXT NULL,
+    is_published TINYINT(1) NOT NULL DEFAULT 1,
+    created_by INT NULL,
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
+    INDEX idx_kb_company (company_id),
+    INDEX idx_kb_visibility (company_id, visibility_scope, is_published)
 );

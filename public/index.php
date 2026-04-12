@@ -37,6 +37,8 @@ use App\Controllers\AnnouncementController;
 use App\Controllers\MaintenanceController;
 use App\Controllers\OpsConsoleController;
 use App\Controllers\SupportController;
+use App\Controllers\KnowledgeBaseController;
+use App\Controllers\SlaController;
 
 $page = $_GET['page'] ?? 'dashboard';
 
@@ -76,6 +78,8 @@ $routes = [
     'maintenance' => [MaintenanceController::class, 'index'],
     'ops_console' => [OpsConsoleController::class, 'index'],
     'support' => [SupportController::class, 'index'],
+    'knowledge_base' => [KnowledgeBaseController::class, 'index'],
+    'sla' => [SlaController::class, 'index'],
 ];
 
 if (!isset($routes[$page])) {

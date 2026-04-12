@@ -1,4 +1,4 @@
-# CS One CRM - Phase 14
+# CS One CRM - Phase 15
 
 A PHP/MySQL multi-tenant CRM platform with CRM core, communications, workflows, AI hooks, API tokens, diagnostics, queue operations, and Phase 14 SaaS operations features.
 
@@ -18,3 +18,9 @@ A PHP/MySQL multi-tenant CRM platform with CRM core, communications, workflows, 
 - Support center
 - Audit filters and CSV export
 - Tenant lifecycle controls
+
+
+## Phase 15 additions
+- SLA policy center
+- breach-aware support ticketing
+- knowledge base management

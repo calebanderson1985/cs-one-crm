@@ -26,3 +26,9 @@ Phase 13 keeps all Phase 12 CRM, workflow, billing scaffold, webhook, diagnostic
 - Support Center
 - Audit filters and CSV export
 - Company suspension/reactivation controls
+
+
+## Phase 15 additions
+- SLA Policies
+- Knowledge Base
+- Support tickets can now carry SLA due dates and breach visibility.
