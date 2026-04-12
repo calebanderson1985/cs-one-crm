@@ -9,7 +9,7 @@ class BaseModel {
     protected array $tenantScopedTables = [
         'users','clients','leads','deals','communications','tasks','commissions','documents','audit_logs',
         'notifications','workflows','workflow_runs','workflow_queue','role_permissions','communication_templates',
-        'outbound_messages','ai_logs','subscriptions','billing_invoices','onboarding_items'
+        'outbound_messages','ai_logs'
     ];
 
     protected array $ownerColumns = [
@@ -92,14 +92,6 @@ class BaseModel {
 
         if ($table === 'users') {
             return $this->buildUserScope($clauses, $params);
-        }
-
-        if (in_array($table, ['subscriptions', 'billing_invoices', 'onboarding_items'], true)) {
-            if ($role === 'manager') {
-                return [implode(' AND ', $clauses), $params];
-            }
-            $clauses[] = '1 = 0';
-            return [implode(' AND ', $clauses), $params];
         }
 
         if ($table === 'notifications') {

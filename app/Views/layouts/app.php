@@ -4,10 +4,7 @@ $currentUser = Auth::user();
 $page = $_GET['page'] ?? 'dashboard';
 $success = flash('success');
 $error = flash('error');
-$appName = $GLOBALS['pdo'] instanceof PDO ? setting($GLOBALS['pdo'], 'app_name', 'CS One CRM Phase 7') : 'CS One CRM Phase 7';
-$accentColor = $GLOBALS['pdo'] instanceof PDO ? setting($GLOBALS['pdo'], 'accent_color', '#0f62fe') : '#0f62fe';
-$tagline = $GLOBALS['pdo'] instanceof PDO ? setting($GLOBALS['pdo'], 'company_tagline', 'Unified CRM operating system') : 'Unified CRM operating system';
-$footerBranding = $GLOBALS['pdo'] instanceof PDO ? setting($GLOBALS['pdo'], 'footer_branding', 'Powered by CS One CRM') : 'Powered by CS One CRM';
+$appName = $GLOBALS['pdo'] instanceof PDO ? setting($GLOBALS['pdo'], 'app_name', 'CS One CRM Phase 6') : 'CS One CRM Phase 6';
 ?>
 <!doctype html>
 <html lang="en">
@@ -16,18 +13,14 @@ $footerBranding = $GLOBALS['pdo'] instanceof PDO ? setting($GLOBALS['pdo'], 'foo
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><?= e(($title ?? $appName)) ?></title>
 <link rel="stylesheet" href="assets/css/app.css">
-<style>:root{--accent: <?= e($accentColor) ?>;}</style>
 </head>
 <body>
 <div class="shell">
     <?php if ($currentUser): ?>
     <aside class="sidebar">
-        <div class="brand-lockup">
-            <h1><?= e($appName) ?></h1>
-            <div class="meta"><?= e($tagline) ?></div>
-        </div>
+        <h1><?= e($appName) ?></h1>
         <?php $unreadNotifications = $currentUser ? (new App\Models\Notification($GLOBALS['pdo']))->unreadCount() : 0; ?>
-        <div class="meta meta-user"><?= e($currentUser['full_name']) ?> · <?= e($currentUser['role']) ?><?php if ($unreadNotifications): ?> · <?= e((string)$unreadNotifications) ?> unread<?php endif; ?></div>
+        <div class="meta"><?= e($currentUser['full_name']) ?> · <?= e($currentUser['role']) ?><?php if ($unreadNotifications): ?> · <?= e((string)$unreadNotifications) ?> unread<?php endif; ?></div>
         <nav>
             <?php if (Auth::canAccess('dashboard')): ?><a class="<?= active_nav($page, 'dashboard') ?>" href="index.php">Dashboard</a><?php endif; ?>
             <div class="nav-group">CRM Core</div>
@@ -41,7 +34,6 @@ $footerBranding = $GLOBALS['pdo'] instanceof PDO ? setting($GLOBALS['pdo'], 'foo
             <?php if (Auth::canAccess('documents')): ?><a class="<?= active_nav($page, 'documents') ?>" href="index.php?page=documents">Documents</a><?php endif; ?>
             <div class="nav-group">Commissions & Finance</div>
             <?php if (Auth::canAccess('commissions')): ?><a class="<?= active_nav($page, 'commissions') ?>" href="index.php?page=commissions">Commissions</a><?php endif; ?>
-            <?php if (Auth::canAccess('billing')): ?><a class="<?= active_nav($page, 'billing') ?>" href="index.php?page=billing">Subscriptions & Billing</a><?php endif; ?>
             <div class="nav-group">Reporting & Automation</div>
             <?php if (Auth::canAccess('reports')): ?><a class="<?= active_nav($page, 'reports') ?>" href="index.php?page=reports">Reports</a><?php endif; ?>
             <?php if (Auth::canAccess('workflows')): ?><a class="<?= active_nav($page, 'workflows') ?>" href="index.php?page=workflows">Workflows</a><?php endif; ?>
@@ -49,9 +41,7 @@ $footerBranding = $GLOBALS['pdo'] instanceof PDO ? setting($GLOBALS['pdo'], 'foo
             <?php if (Auth::canAccess('ai')): ?><a class="<?= active_nav($page, 'ai') ?>" href="index.php?page=ai">AI Workspace</a><?php endif; ?>
             <div class="nav-group">Portals</div>
             <?php if (Auth::canAccess('portals')): ?><a class="<?= active_nav($page, 'portals') ?>" href="index.php?page=portals">Portal Center</a><?php endif; ?>
-            <div class="nav-group">Commercial & Admin</div>
-            <?php if (Auth::canAccess('branding')): ?><a class="<?= active_nav($page, 'branding') ?>" href="index.php?page=branding">Branding Center</a><?php endif; ?>
-            <?php if (Auth::canAccess('onboarding')): ?><a class="<?= active_nav($page, 'onboarding') ?>" href="index.php?page=onboarding">Onboarding</a><?php endif; ?>
+            <div class="nav-group">Administration</div>
             <?php if (Auth::canAccess('users')): ?><a class="<?= active_nav($page, 'users') ?>" href="index.php?page=users">User Management</a><?php endif; ?>
             <?php if (Auth::canAccess('permissions')): ?><a class="<?= active_nav($page, 'permissions') ?>" href="index.php?page=permissions">Permissions</a><?php endif; ?>
             <?php if (Auth::canAccess('audit')): ?><a class="<?= active_nav($page, 'audit') ?>" href="index.php?page=audit">Audit Trail</a><?php endif; ?>
@@ -60,22 +50,9 @@ $footerBranding = $GLOBALS['pdo'] instanceof PDO ? setting($GLOBALS['pdo'], 'foo
             <?php if (Auth::canAccess('settings')): ?><a class="<?= active_nav($page, 'settings') ?>" href="index.php?page=settings">System Settings</a><?php endif; ?>
             <a href="index.php?page=logout">Logout</a>
         </nav>
-        <div class="sidebar-footer"><?= e($footerBranding) ?></div>
     </aside>
     <?php endif; ?>
     <main class="content <?php if (!$currentUser) echo 'content--full'; ?>">
-        <?php if ($currentUser): ?>
-            <div class="topbar">
-                <div>
-                    <div class="topbar-title"><?= e(ucwords(str_replace('_', ' ', $page === 'dashboard' ? 'dashboard' : $page))) ?></div>
-                    <div class="muted"><?= e($appName) ?> · <?= e($tagline) ?></div>
-                </div>
-                <div class="badge-grid">
-                    <span class="badge">Company #<?= e((string) current_company_id()) ?></span>
-                    <span class="badge">Role: <?= e(current_user_role()) ?></span>
-                </div>
-            </div>
-        <?php endif; ?>
         <?php if ($success): ?><div class="alert alert-success"><?= e($success) ?></div><?php endif; ?>
         <?php if ($error): ?><div class="alert"><?= e($error) ?></div><?php endif; ?>
         <?php include $viewFile; ?>

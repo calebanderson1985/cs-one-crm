@@ -1,76 +1,48 @@
-# CS One CRM
+# CS One CRM Recovered Repo
 
-CS One CRM is an all-in-one PHP/MySQL CRM foundation designed to consolidate CRM core, communications, workflows, AI utilities, reporting, commissions, portals, and admin operations into one installable web application.
+This repository was reconstructed from the latest recoverable build artifacts after a runtime reset. The application code in this repo comes from the working **Phase 6** package, with surviving later-phase docs included as references where available.
 
-## Current repository baseline
-This repository now contains **Phase 7**.
+## Status
+- Recoverable code baseline: **Phase 6**
+- Recoverable repo docs: partial **Phase 7** references
+- Phase 8/9 code: not present in the runtime filesystem at recovery time
 
-## What Phase 7 adds
-- White-label branding settings
-- Subscription and billing center
-- Onboarding / go-live checklist
-- Deployment tooling and health endpoint
-- More polished commercial admin shell
+## Purpose
+Use this as the stable GitHub source of truth and continue rebuilding later phases under version control.
 
-## Included modules
+---
+
+# CS One CRM Phase 6
+
+A categorized all-in-one PHP/MySQL CRM foundation with:
+
 - CRM Core: clients, leads, deals, tasks
-- Communications: templates, message logs, outbound queue, inbound tracking
+- Communication: email/SMS queue, templates, activity log
 - Commissions & Finance
-- Reports & Analytics
-- Workflow Engine with queued execution
-- AI Workspace for summaries, drafts, and lead scoring
-- Documents
-- Notifications
-- Branding Center
-- Subscription & Billing Center
-- Onboarding Center
-- Admin, Manager, Agent, and Client portal shell
-- Role-based permissions and starter tenant isolation
-- API entrypoint for CRM resources
+- Reporting & Analytics
+- Workflow Automation with queue worker
+- AI Workspace for lead scoring, summaries, and drafts
+- Role-based permissions and team ownership
+- Multi-tenant company isolation starter model
+- API entrypoint at `public/api.php`
 
-## Tech stack
-- PHP
-- HTML5
-- MySQL
-- Minimal MVC-style structure
+## Install
 
-## Repository structure
-```text
-app/            Controllers, models, services, views
-config/         Application configuration
-cron/           Background workers
-database/       Schema and seed files
-docs/           User guide, deployment guide, roadmap
-public/         Web entrypoints and assets
-storage/        Uploads, logs, cache
-install.php     Browser installer
-bootstrap.php   App bootstrap
-```
+1. Create an empty MySQL database.
+2. Open `install.php` in the browser.
+3. Enter database credentials and admin account details.
+4. Sign in at `public/index.php?page=login`.
 
-## Quick start
-1. Clone this repository.
-2. Copy `.env.example` to `.env` for your own deployment notes if desired.
-3. Create an empty MySQL database.
-4. Open `install.php` in your browser.
-5. Log in at `public/index.php?page=login`.
-6. Visit Branding, Billing, and Onboarding to finish go-live setup.
+## Worker
 
-## Background worker
-Process workflows and outbound communications:
+Run the worker regularly to process workflow jobs and outbound communications:
 
 ```bash
 php cron/worker.php
 ```
 
-Process a single company only:
+To process a single tenant/company only, pass the company id:
 
 ```bash
 php cron/worker.php 1
-```
-
-## Health endpoint
-Check service readiness:
-
-```text
-/public/health.php
 ```
