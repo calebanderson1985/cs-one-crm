@@ -202,3 +202,19 @@ function current_base_company_id(): int {
 function is_super_admin(): bool {
     return current_user_role() === 'admin' && current_base_company_id() === 1;
 }
+
+
+function password_policy_errors(PDO $db, string $password): array {
+    $errors = [];
+    $min = max(8, (int) setting($db, 'password_policy_min_length', '10'));
+    if (strlen($password) < $min) {
+        $errors[] = 'Password must be at least ' . $min . ' characters long.';
+    }
+    if (setting($db, 'password_policy_require_number', '1') === '1' && !preg_match('/\d/', $password)) {
+        $errors[] = 'Password must include at least one number.';
+    }
+    if (setting($db, 'password_policy_require_symbol', '0') === '1' && !preg_match('/[^a-zA-Z0-9]/', $password)) {
+        $errors[] = 'Password must include at least one symbol.';
+    }
+    return $errors;
+}

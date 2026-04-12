@@ -38,6 +38,10 @@ class SettingsController {
                 'login_rate_window_minutes' => $_POST['login_rate_window_minutes'] ?? '15',
                 'stripe_webhook_tolerance_seconds' => $_POST['stripe_webhook_tolerance_seconds'] ?? '300',
                 'stripe_webhook_require_verification' => $_POST['stripe_webhook_require_verification'] ?? '0',
+                'password_policy_min_length' => $_POST['password_policy_min_length'] ?? '10',
+                'password_policy_require_number' => $_POST['password_policy_require_number'] ?? '1',
+                'password_policy_require_symbol' => $_POST['password_policy_require_symbol'] ?? '0',
+                'api_rate_limit_per_minute' => $_POST['api_rate_limit_per_minute'] ?? '60',
             ]);
             audit_log($this->db, 'settings', 'update', null, 'System settings updated');
             flash('success', 'Settings saved.');

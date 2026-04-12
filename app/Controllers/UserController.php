@@ -16,6 +16,8 @@ class UserController {
             $action = $_POST['action'] ?? 'create';
             if ($action === 'create') {
                 Auth::requirePermission('users', 'create');
+                $policyErrors = password_policy_errors($this->db, (string)($_POST['password'] ?? ''));
+                if ($policyErrors) { flash('error', implode(' ', $policyErrors)); redirect('index.php?page=users'); }
                 $id = $model->create($_POST);
                 audit_log($this->db, 'users', 'create', $id, 'User created');
                 flash('success', 'User created.');
@@ -23,6 +25,7 @@ class UserController {
             if ($action === 'update') {
                 Auth::requirePermission('users', 'edit');
                 $id = (int) $_POST['id'];
+                if (!empty($_POST['password'])) { $policyErrors = password_policy_errors($this->db, (string)$_POST['password']); if ($policyErrors) { flash('error', implode(' ', $policyErrors)); redirect('index.php?page=users&id=' . $id); } }
                 $model->update($id, $_POST);
                 audit_log($this->db, 'users', 'update', $id, 'User updated');
                 flash('success', 'User updated.');

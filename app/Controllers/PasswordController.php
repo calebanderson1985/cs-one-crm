@@ -42,6 +42,12 @@ class PasswordController {
                 View::render('auth/reset_password', compact('token', 'error'));
                 return;
             }
+            $policyErrors = password_policy_errors($this->db, $password);
+            if ($policyErrors) {
+                $error = implode(' ', $policyErrors);
+                View::render('auth/reset_password', compact('token', 'error'));
+                return;
+            }
             $ok = (new PasswordReset($this->db))->consume($token, $password);
             if ($ok) {
                 flash('success', 'Password reset completed. You can now sign in.');

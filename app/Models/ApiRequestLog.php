@@ -2,6 +2,12 @@
 namespace App\Models;
 
 class ApiRequestLog extends BaseModel {
+    public function recentCountForWindow(int $tokenId, int $minutes = 1): int {
+        if ($tokenId <= 0) { return 0; }
+        $stmt = $this->db->prepare('SELECT COUNT(*) FROM api_request_logs WHERE company_id = ? AND api_token_id = ? AND created_at >= DATE_SUB(NOW(), INTERVAL ? MINUTE)');
+        $stmt->execute([current_company_id(), $tokenId, max(1, $minutes)]);
+        return (int) $stmt->fetchColumn();
+    }
     public function listRecent(int $limit = 100): array {
         $stmt = $this->db->prepare("SELECT * FROM api_request_logs WHERE company_id = ? ORDER BY id DESC LIMIT {$limit}");
         $stmt->execute([current_company_id()]);

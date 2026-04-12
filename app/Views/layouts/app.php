@@ -48,6 +48,9 @@ $appName = $GLOBALS['pdo'] instanceof PDO ? setting($GLOBALS['pdo'], 'app_name',
             <?php if (Auth::canAccess('api')): ?><a class="<?= active_nav($page, 'api') ?>" href="index.php?page=api">API</a><?php endif; ?>
             <?php if (Auth::canAccess('tokens')): ?><a class="<?= active_nav($page, 'tokens') ?>" href="index.php?page=tokens">API Tokens</a><?php endif; ?>
             <?php if (Auth::canAccess('api_analytics')): ?><a class="<?= active_nav($page, 'api_analytics') ?>" href="index.php?page=api_analytics">API Analytics</a><?php endif; ?>
+            <?php if (Auth::canAccess('queue_ops')): ?><a class="<?= active_nav($page, 'queue_ops') ?>" href="index.php?page=queue_ops">Queue Operations</a><?php endif; ?>
+            <?php if (Auth::canAccess('webhooks')): ?><a class="<?= active_nav($page, 'webhooks') ?>" href="index.php?page=webhooks">Webhook Events</a><?php endif; ?>
+            <?php if (Auth::canAccess('diagnostics')): ?><a class="<?= active_nav($page, 'diagnostics') ?>" href="index.php?page=diagnostics">Diagnostics</a><?php endif; ?>
             <?php if (Auth::canAccess('company_switch') && is_super_admin()): ?><a class="<?= active_nav($page, 'company_switch') ?>" href="index.php?page=company_switch">Company Switch</a><?php endif; ?>
             <?php if (Auth::canAccess('onboarding')): ?><a class="<?= active_nav($page, 'onboarding') ?>" href="index.php?page=onboarding">Launch Wizard</a><?php endif; ?>
             <?php if (Auth::canAccess('features')): ?><a class="<?= active_nav($page, 'features') ?>" href="index.php?page=features">Feature Registry</a><?php endif; ?>
