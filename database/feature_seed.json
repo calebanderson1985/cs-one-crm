@@ -1,0 +1,806 @@
+[
+  {
+    "category_name": "CRM Core",
+    "feature_name": "Agent Leaderboard V13",
+    "source_module": "caring-sharing-agent-leaderboard-v13",
+    "usage_summary": "Client, contact, lead, deal, pipeline, and account operations."
+  },
+  {
+    "category_name": "CRM Core",
+    "feature_name": "Ai Crm Suite V180",
+    "source_module": "caring-sharing-ai-crm-suite-v180",
+    "usage_summary": "Client, contact, lead, deal, pipeline, and account operations."
+  },
+  {
+    "category_name": "CRM Core",
+    "feature_name": "Customer Journey V88",
+    "source_module": "caring-sharing-customer-journey-v88",
+    "usage_summary": "Client, contact, lead, deal, pipeline, and account operations."
+  },
+  {
+    "category_name": "CRM Core",
+    "feature_name": "Manager Lead Routing V13",
+    "source_module": "caring-sharing-manager-lead-routing-v13",
+    "usage_summary": "Client, contact, lead, deal, pipeline, and account operations."
+  },
+  {
+    "category_name": "CRM Core",
+    "feature_name": "Marketing Lead Engine V86",
+    "source_module": "caring-sharing-marketing-lead-engine-v86",
+    "usage_summary": "Client, contact, lead, deal, pipeline, and account operations."
+  },
+  {
+    "category_name": "CRM Core",
+    "feature_name": "Native Client Workspace V25",
+    "source_module": "caring-sharing-native-client-workspace-v25",
+    "usage_summary": "Client, contact, lead, deal, pipeline, and account operations."
+  },
+  {
+    "category_name": "CRM Core",
+    "feature_name": "Native Shared Table Crm V22",
+    "source_module": "caring-sharing-native-shared-table-crm-v22",
+    "usage_summary": "Client, contact, lead, deal, pipeline, and account operations."
+  },
+  {
+    "category_name": "CRM Core",
+    "feature_name": "Platform Crm Module Merge V11",
+    "source_module": "caring-sharing-platform-crm-module-merge-v11",
+    "usage_summary": "Client, contact, lead, deal, pipeline, and account operations."
+  },
+  {
+    "category_name": "CRM Core",
+    "feature_name": "Real Agent Messaging Crm Sync V103",
+    "source_module": "caring-sharing-real-agent-messaging-crm-sync-v103",
+    "usage_summary": "Client, contact, lead, deal, pipeline, and account operations."
+  },
+  {
+    "category_name": "CRM Core",
+    "feature_name": "Sales Pipeline V83",
+    "source_module": "caring-sharing-sales-pipeline-v83",
+    "usage_summary": "Client, contact, lead, deal, pipeline, and account operations."
+  },
+  {
+    "category_name": "CRM Core",
+    "feature_name": "Tenant Aware Crm Dashboard V62",
+    "source_module": "caring-sharing-tenant-aware-crm-dashboard-v62",
+    "usage_summary": "Client, contact, lead, deal, pipeline, and account operations."
+  },
+  {
+    "category_name": "CRM Core",
+    "feature_name": "Campaign Attribution Funnel V87",
+    "source_module": "caring-sharing-campaign-attribution-funnel-v87",
+    "usage_summary": "Client, contact, lead, deal, pipeline, and account operations."
+  },
+  {
+    "category_name": "CRM Core",
+    "feature_name": "Cold Outreach Engine V152",
+    "source_module": "caring-sharing-cold-outreach-engine-v152",
+    "usage_summary": "Client, contact, lead, deal, pipeline, and account operations."
+  },
+  {
+    "category_name": "CRM Core",
+    "feature_name": "Growth V143",
+    "source_module": "caring-sharing-growth-v143",
+    "usage_summary": "Client, contact, lead, deal, pipeline, and account operations."
+  },
+  {
+    "category_name": "CRM Core",
+    "feature_name": "Gtm Command Center V160",
+    "source_module": "caring-sharing-gtm-command-center-v160",
+    "usage_summary": "Client, contact, lead, deal, pipeline, and account operations."
+  },
+  {
+    "category_name": "Communications",
+    "feature_name": "Commission Tracker Statements Email V17",
+    "source_module": "caring-sharing-commission-tracker-statements-email-v17",
+    "usage_summary": "Email, SMS, messaging sync, outreach, and conversation management."
+  },
+  {
+    "category_name": "Communications",
+    "feature_name": "Email Notification V71",
+    "source_module": "caring-sharing-email-notification-v71",
+    "usage_summary": "Email, SMS, messaging sync, outreach, and conversation management."
+  },
+  {
+    "category_name": "Communications",
+    "feature_name": "Email Workflows V72",
+    "source_module": "caring-sharing-email-workflows-v72",
+    "usage_summary": "Email, SMS, messaging sync, outreach, and conversation management."
+  },
+  {
+    "category_name": "Communications",
+    "feature_name": "Outbound Delivery Webhooks V105",
+    "source_module": "caring-sharing-outbound-delivery-webhooks-v105",
+    "usage_summary": "Email, SMS, messaging sync, outreach, and conversation management."
+  },
+  {
+    "category_name": "Communications",
+    "feature_name": "Sms Automation Rules V35",
+    "source_module": "caring-sharing-sms-automation-rules-v35",
+    "usage_summary": "Email, SMS, messaging sync, outreach, and conversation management."
+  },
+  {
+    "category_name": "Communications",
+    "feature_name": "Sms Campaigns V36",
+    "source_module": "caring-sharing-sms-campaigns-v36",
+    "usage_summary": "Email, SMS, messaging sync, outreach, and conversation management."
+  },
+  {
+    "category_name": "Communications",
+    "feature_name": "Sms Conversation Workspace V33",
+    "source_module": "caring-sharing-sms-conversation-workspace-v33",
+    "usage_summary": "Email, SMS, messaging sync, outreach, and conversation management."
+  },
+  {
+    "category_name": "Communications",
+    "feature_name": "Sms Reply Engine V34",
+    "source_module": "caring-sharing-sms-reply-engine-v34",
+    "usage_summary": "Email, SMS, messaging sync, outreach, and conversation management."
+  },
+  {
+    "category_name": "Communications",
+    "feature_name": "Tenant Aware Sms Ai V64",
+    "source_module": "caring-sharing-tenant-aware-sms-ai-v64",
+    "usage_summary": "Email, SMS, messaging sync, outreach, and conversation management."
+  },
+  {
+    "category_name": "Communications",
+    "feature_name": "Twilio Integration Layer V32",
+    "source_module": "caring-sharing-twilio-integration-layer-v32",
+    "usage_summary": "Email, SMS, messaging sync, outreach, and conversation management."
+  },
+  {
+    "category_name": "Commissions & Finance",
+    "feature_name": "Commission Importer V21",
+    "source_module": "caring-sharing-commission-importer-v21",
+    "usage_summary": "Commission tracking, statements, billing, payroll, revenue, and finance ops."
+  },
+  {
+    "category_name": "Commissions & Finance",
+    "feature_name": "Commission Statement Scheduler V18",
+    "source_module": "caring-sharing-commission-statement-scheduler-v18",
+    "usage_summary": "Commission tracking, statements, billing, payroll, revenue, and finance ops."
+  },
+  {
+    "category_name": "Commissions & Finance",
+    "feature_name": "Commission Tracker V15",
+    "source_module": "caring-sharing-commission-tracker-v15",
+    "usage_summary": "Commission tracking, statements, billing, payroll, revenue, and finance ops."
+  },
+  {
+    "category_name": "Commissions & Finance",
+    "feature_name": "Commission Tracker V16",
+    "source_module": "caring-sharing-commission-tracker-v16",
+    "usage_summary": "Commission tracking, statements, billing, payroll, revenue, and finance ops."
+  },
+  {
+    "category_name": "Commissions & Finance",
+    "feature_name": "Finance Dashboard V20",
+    "source_module": "caring-sharing-finance-dashboard-v20",
+    "usage_summary": "Commission tracking, statements, billing, payroll, revenue, and finance ops."
+  },
+  {
+    "category_name": "Commissions & Finance",
+    "feature_name": "Magic Link Billing Portal V69",
+    "source_module": "caring-sharing-magic-link-billing-portal-v69",
+    "usage_summary": "Commission tracking, statements, billing, payroll, revenue, and finance ops."
+  },
+  {
+    "category_name": "Commissions & Finance",
+    "feature_name": "Native Shared Table Finance V23",
+    "source_module": "caring-sharing-native-shared-table-finance-v23",
+    "usage_summary": "Commission tracking, statements, billing, payroll, revenue, and finance ops."
+  },
+  {
+    "category_name": "Commissions & Finance",
+    "feature_name": "Payroll Scheduler V19",
+    "source_module": "caring-sharing-payroll-scheduler-v19",
+    "usage_summary": "Commission tracking, statements, billing, payroll, revenue, and finance ops."
+  },
+  {
+    "category_name": "Commissions & Finance",
+    "feature_name": "Platform Finance Module Merge V12",
+    "source_module": "caring-sharing-platform-finance-module-merge-v12",
+    "usage_summary": "Commission tracking, statements, billing, payroll, revenue, and finance ops."
+  },
+  {
+    "category_name": "Commissions & Finance",
+    "feature_name": "Profit Dashboard V23",
+    "source_module": "caring-sharing-profit-dashboard-v23",
+    "usage_summary": "Commission tracking, statements, billing, payroll, revenue, and finance ops."
+  },
+  {
+    "category_name": "Commissions & Finance",
+    "feature_name": "Revenue Tracker V22",
+    "source_module": "caring-sharing-revenue-tracker-v22",
+    "usage_summary": "Commission tracking, statements, billing, payroll, revenue, and finance ops."
+  },
+  {
+    "category_name": "Commissions & Finance",
+    "feature_name": "Saas Billing Subscriptions V65",
+    "source_module": "caring-sharing-saas-billing-subscriptions-v65",
+    "usage_summary": "Commission tracking, statements, billing, payroll, revenue, and finance ops."
+  },
+  {
+    "category_name": "Commissions & Finance",
+    "feature_name": "Saas Onboarding Billing V122",
+    "source_module": "caring-sharing-saas-onboarding-billing-v122",
+    "usage_summary": "Commission tracking, statements, billing, payroll, revenue, and finance ops."
+  },
+  {
+    "category_name": "Commissions & Finance",
+    "feature_name": "Stripe Checkout Webhook Sync V66",
+    "source_module": "caring-sharing-stripe-checkout-webhook-sync-v66",
+    "usage_summary": "Commission tracking, statements, billing, payroll, revenue, and finance ops."
+  },
+  {
+    "category_name": "Commissions & Finance",
+    "feature_name": "Stripe V141",
+    "source_module": "caring-sharing-stripe-v141",
+    "usage_summary": "Commission tracking, statements, billing, payroll, revenue, and finance ops."
+  },
+  {
+    "category_name": "Commissions & Finance",
+    "feature_name": "Tenant Aware Finance Workflow V63",
+    "source_module": "caring-sharing-tenant-aware-finance-workflow-v63",
+    "usage_summary": "Commission tracking, statements, billing, payroll, revenue, and finance ops."
+  },
+  {
+    "category_name": "Commissions & Finance",
+    "feature_name": "Tenant Billing Plan Limits V1002",
+    "source_module": "caring-sharing-tenant-billing-plan-limits-v1002",
+    "usage_summary": "Commission tracking, statements, billing, payroll, revenue, and finance ops."
+  },
+  {
+    "category_name": "Commissions & Finance",
+    "feature_name": "Tenant Billing Plan Limits V1002",
+    "source_module": "caring-sharing-tenant-billing-plan-limits-v1002-fixed",
+    "usage_summary": "Commission tracking, statements, billing, payroll, revenue, and finance ops."
+  },
+  {
+    "category_name": "Reporting & Analytics",
+    "feature_name": "Agent Onboarding Admin Tools V22",
+    "source_module": "caring-sharing-agent-onboarding-admin-tools-v22",
+    "usage_summary": "Dashboards, KPI tracking, forecasting, and operational reporting."
+  },
+  {
+    "category_name": "Reporting & Analytics",
+    "feature_name": "Agent Onboarding Approval Plus V14",
+    "source_module": "caring-sharing-agent-onboarding-approval-plus-v14",
+    "usage_summary": "Dashboards, KPI tracking, forecasting, and operational reporting."
+  },
+  {
+    "category_name": "Reporting & Analytics",
+    "feature_name": "Board Reporting V81",
+    "source_module": "caring-sharing-board-reporting-v81",
+    "usage_summary": "Dashboards, KPI tracking, forecasting, and operational reporting."
+  },
+  {
+    "category_name": "Reporting & Analytics",
+    "feature_name": "Dashboard Conversion V12",
+    "source_module": "caring-sharing-dashboard-conversion-v12",
+    "usage_summary": "Dashboards, KPI tracking, forecasting, and operational reporting."
+  },
+  {
+    "category_name": "Reporting & Analytics",
+    "feature_name": "Dashboard V142",
+    "source_module": "caring-sharing-dashboard-v142",
+    "usage_summary": "Dashboards, KPI tracking, forecasting, and operational reporting."
+  },
+  {
+    "category_name": "Reporting & Analytics",
+    "feature_name": "Executive Forecast Dashboard V24",
+    "source_module": "caring-sharing-executive-forecast-dashboard-v24",
+    "usage_summary": "Dashboards, KPI tracking, forecasting, and operational reporting."
+  },
+  {
+    "category_name": "Reporting & Analytics",
+    "feature_name": "Forecasting Trends V48",
+    "source_module": "caring-sharing-forecasting-trends-v48",
+    "usage_summary": "Dashboards, KPI tracking, forecasting, and operational reporting."
+  },
+  {
+    "category_name": "Reporting & Analytics",
+    "feature_name": "Forecasting Trends V49",
+    "source_module": "caring-sharing-forecasting-trends-v49",
+    "usage_summary": "Dashboards, KPI tracking, forecasting, and operational reporting."
+  },
+  {
+    "category_name": "Reporting & Analytics",
+    "feature_name": "Goal Tracking Scorecards V47",
+    "source_module": "caring-sharing-goal-tracking-scorecards-v47",
+    "usage_summary": "Dashboards, KPI tracking, forecasting, and operational reporting."
+  },
+  {
+    "category_name": "Reporting & Analytics",
+    "feature_name": "Growth Churn Analytics V82",
+    "source_module": "caring-sharing-growth-churn-analytics-v82",
+    "usage_summary": "Dashboards, KPI tracking, forecasting, and operational reporting."
+  },
+  {
+    "category_name": "Reporting & Analytics",
+    "feature_name": "Kpi V161",
+    "source_module": "caring-sharing-kpi-v161",
+    "usage_summary": "Dashboards, KPI tracking, forecasting, and operational reporting."
+  },
+  {
+    "category_name": "Reporting & Analytics",
+    "feature_name": "Manager Dashboard Widgets V11",
+    "source_module": "caring-sharing-manager-dashboard-widgets-v11",
+    "usage_summary": "Dashboards, KPI tracking, forecasting, and operational reporting."
+  },
+  {
+    "category_name": "Reporting & Analytics",
+    "feature_name": "Platform Reporting Module Merge V13",
+    "source_module": "caring-sharing-platform-reporting-module-merge-v13",
+    "usage_summary": "Dashboards, KPI tracking, forecasting, and operational reporting."
+  },
+  {
+    "category_name": "Reporting & Analytics",
+    "feature_name": "Realtime Dashboard V45",
+    "source_module": "caring-sharing-realtime-dashboard-v45",
+    "usage_summary": "Dashboards, KPI tracking, forecasting, and operational reporting."
+  },
+  {
+    "category_name": "Reporting & Analytics",
+    "feature_name": "Reporting Center V26",
+    "source_module": "caring-sharing-reporting-center-v26",
+    "usage_summary": "Dashboards, KPI tracking, forecasting, and operational reporting."
+  },
+  {
+    "category_name": "Reporting & Analytics",
+    "feature_name": "Role Based Dashboards V27",
+    "source_module": "caring-sharing-role-based-dashboards-v27",
+    "usage_summary": "Dashboards, KPI tracking, forecasting, and operational reporting."
+  },
+  {
+    "category_name": "Reporting & Analytics",
+    "feature_name": "Role Based Executive Dashboards V46",
+    "source_module": "caring-sharing-role-based-executive-dashboards-v46",
+    "usage_summary": "Dashboards, KPI tracking, forecasting, and operational reporting."
+  },
+  {
+    "category_name": "Reporting & Analytics",
+    "feature_name": "Tenant Onboarding Signup V67",
+    "source_module": "caring-sharing-tenant-onboarding-signup-v67",
+    "usage_summary": "Dashboards, KPI tracking, forecasting, and operational reporting."
+  },
+  {
+    "category_name": "Reporting & Analytics",
+    "feature_name": "Whitelabel Client Dashboard V1003",
+    "source_module": "caring-sharing-whitelabel-client-dashboard-v1003",
+    "usage_summary": "Dashboards, KPI tracking, forecasting, and operational reporting."
+  },
+  {
+    "category_name": "Reporting & Analytics",
+    "feature_name": "Workflow Analytics V44",
+    "source_module": "caring-sharing-workflow-analytics-v44",
+    "usage_summary": "Dashboards, KPI tracking, forecasting, and operational reporting."
+  },
+  {
+    "category_name": "Reporting & Analytics",
+    "feature_name": "Predictive Revenue V92",
+    "source_module": "caring-sharing-predictive-revenue-v92",
+    "usage_summary": "Dashboards, KPI tracking, forecasting, and operational reporting."
+  },
+  {
+    "category_name": "Reporting & Analytics",
+    "feature_name": "Revenue Deployment V150",
+    "source_module": "caring-sharing-revenue-deployment-v150",
+    "usage_summary": "Dashboards, KPI tracking, forecasting, and operational reporting."
+  },
+  {
+    "category_name": "Workflows & Automation",
+    "feature_name": "Advanced Workflow Executor V43",
+    "source_module": "caring-sharing-advanced-workflow-executor-v43",
+    "usage_summary": "Workflow design, triggers, orchestration, jobs, and automation execution."
+  },
+  {
+    "category_name": "Workflows & Automation",
+    "feature_name": "Ai Automation Layer Lite V50A",
+    "source_module": "caring-sharing-ai-automation-layer-lite-v50a",
+    "usage_summary": "Workflow design, triggers, orchestration, jobs, and automation execution."
+  },
+  {
+    "category_name": "Workflows & Automation",
+    "feature_name": "Ai Automation Layer Openai V50B",
+    "source_module": "caring-sharing-ai-automation-layer-openai-v50b",
+    "usage_summary": "Workflow design, triggers, orchestration, jobs, and automation execution."
+  },
+  {
+    "category_name": "Workflows & Automation",
+    "feature_name": "Background Jobs Dlq V77",
+    "source_module": "caring-sharing-background-jobs-dlq-v77",
+    "usage_summary": "Workflow design, triggers, orchestration, jobs, and automation execution."
+  },
+  {
+    "category_name": "Workflows & Automation",
+    "feature_name": "Conditional Multistep Workflows V42",
+    "source_module": "caring-sharing-conditional-multistep-workflows-v42",
+    "usage_summary": "Workflow design, triggers, orchestration, jobs, and automation execution."
+  },
+  {
+    "category_name": "Workflows & Automation",
+    "feature_name": "Event Orchestration Engine V75",
+    "source_module": "caring-sharing-event-orchestration-engine-v75",
+    "usage_summary": "Workflow design, triggers, orchestration, jobs, and automation execution."
+  },
+  {
+    "category_name": "Workflows & Automation",
+    "feature_name": "Multi Agent Orchestration V108",
+    "source_module": "caring-sharing-multi-agent-orchestration-v108",
+    "usage_summary": "Workflow design, triggers, orchestration, jobs, and automation execution."
+  },
+  {
+    "category_name": "Workflows & Automation",
+    "feature_name": "Platform Automation Module Merge V14",
+    "source_module": "caring-sharing-platform-automation-module-merge-v14",
+    "usage_summary": "Workflow design, triggers, orchestration, jobs, and automation execution."
+  },
+  {
+    "category_name": "Workflows & Automation",
+    "feature_name": "Reliability Retry Queue V76",
+    "source_module": "caring-sharing-reliability-retry-queue-v76",
+    "usage_summary": "Workflow design, triggers, orchestration, jobs, and automation execution."
+  },
+  {
+    "category_name": "Workflows & Automation",
+    "feature_name": "Revenue Automation V84",
+    "source_module": "caring-sharing-revenue-automation-v84",
+    "usage_summary": "Workflow design, triggers, orchestration, jobs, and automation execution."
+  },
+  {
+    "category_name": "Workflows & Automation",
+    "feature_name": "Revenue Automation V84",
+    "source_module": "caring-sharing-revenue-automation-v84-fixed",
+    "usage_summary": "Workflow design, triggers, orchestration, jobs, and automation execution."
+  },
+  {
+    "category_name": "Workflows & Automation",
+    "feature_name": "Unified Dispatch Observability V78",
+    "source_module": "caring-sharing-unified-dispatch-observability-v78",
+    "usage_summary": "Workflow design, triggers, orchestration, jobs, and automation execution."
+  },
+  {
+    "category_name": "Workflows & Automation",
+    "feature_name": "Visual Workflow Builder V40",
+    "source_module": "caring-sharing-visual-workflow-builder-v40",
+    "usage_summary": "Workflow design, triggers, orchestration, jobs, and automation execution."
+  },
+  {
+    "category_name": "Workflows & Automation",
+    "feature_name": "Workflow Engine V24",
+    "source_module": "caring-sharing-workflow-engine-v24",
+    "usage_summary": "Workflow design, triggers, orchestration, jobs, and automation execution."
+  },
+  {
+    "category_name": "Workflows & Automation",
+    "feature_name": "Workflow Executor V41",
+    "source_module": "caring-sharing-workflow-executor-v41",
+    "usage_summary": "Workflow design, triggers, orchestration, jobs, and automation execution."
+  },
+  {
+    "category_name": "AI & Intelligence",
+    "feature_name": "Ai Agent Console Assist V52A",
+    "source_module": "caring-sharing-ai-agent-console-assist-v52a",
+    "usage_summary": "AI copilots, decisioning, memory, autonomous actions, and provider integrations."
+  },
+  {
+    "category_name": "AI & Intelligence",
+    "feature_name": "Ai Agent Console Autonomous V52B",
+    "source_module": "caring-sharing-ai-agent-console-autonomous-v52b",
+    "usage_summary": "AI copilots, decisioning, memory, autonomous actions, and provider integrations."
+  },
+  {
+    "category_name": "AI & Intelligence",
+    "feature_name": "Ai Autopilot Mode V123",
+    "source_module": "caring-sharing-ai-autopilot-mode-v123",
+    "usage_summary": "AI copilots, decisioning, memory, autonomous actions, and provider integrations."
+  },
+  {
+    "category_name": "AI & Intelligence",
+    "feature_name": "Ai Copilot Workspace Operator V51B",
+    "source_module": "caring-sharing-ai-copilot-workspace-operator-v51b",
+    "usage_summary": "AI copilots, decisioning, memory, autonomous actions, and provider integrations."
+  },
+  {
+    "category_name": "AI & Intelligence",
+    "feature_name": "Ai Copilot Workspace Safe V51A",
+    "source_module": "caring-sharing-ai-copilot-workspace-safe-v51a",
+    "usage_summary": "AI copilots, decisioning, memory, autonomous actions, and provider integrations."
+  },
+  {
+    "category_name": "AI & Intelligence",
+    "feature_name": "Ai Decision Engine V111",
+    "source_module": "caring-sharing-ai-decision-engine-v111",
+    "usage_summary": "AI copilots, decisioning, memory, autonomous actions, and provider integrations."
+  },
+  {
+    "category_name": "AI & Intelligence",
+    "feature_name": "Ai Operator Console V94",
+    "source_module": "caring-sharing-ai-operator-console-v94",
+    "usage_summary": "AI copilots, decisioning, memory, autonomous actions, and provider integrations."
+  },
+  {
+    "category_name": "AI & Intelligence",
+    "feature_name": "Ai Sales Funnel V151",
+    "source_module": "caring-sharing-ai-sales-funnel-v151",
+    "usage_summary": "AI copilots, decisioning, memory, autonomous actions, and provider integrations."
+  },
+  {
+    "category_name": "AI & Intelligence",
+    "feature_name": "Ai Sales Support Agents V101",
+    "source_module": "caring-sharing-ai-sales-support-agents-v101",
+    "usage_summary": "AI copilots, decisioning, memory, autonomous actions, and provider integrations."
+  },
+  {
+    "category_name": "AI & Intelligence",
+    "feature_name": "Autonomous Company Mode V102",
+    "source_module": "caring-sharing-autonomous-company-mode-v102",
+    "usage_summary": "AI copilots, decisioning, memory, autonomous actions, and provider integrations."
+  },
+  {
+    "category_name": "AI & Intelligence",
+    "feature_name": "Autonomous Optimization Engine V93",
+    "source_module": "caring-sharing-autonomous-optimization-engine-v93",
+    "usage_summary": "AI copilots, decisioning, memory, autonomous actions, and provider integrations."
+  },
+  {
+    "category_name": "AI & Intelligence",
+    "feature_name": "Autonomous Os V110",
+    "source_module": "caring-sharing-autonomous-os-v110",
+    "usage_summary": "AI copilots, decisioning, memory, autonomous actions, and provider integrations."
+  },
+  {
+    "category_name": "AI & Intelligence",
+    "feature_name": "Autonomous Revenue Loop V114",
+    "source_module": "caring-sharing-autonomous-revenue-loop-v114",
+    "usage_summary": "AI copilots, decisioning, memory, autonomous actions, and provider integrations."
+  },
+  {
+    "category_name": "AI & Intelligence",
+    "feature_name": "Autonomous Saas Engine V90",
+    "source_module": "caring-sharing-autonomous-saas-engine-v90",
+    "usage_summary": "AI copilots, decisioning, memory, autonomous actions, and provider integrations."
+  },
+  {
+    "category_name": "AI & Intelligence",
+    "feature_name": "Autonomous Saas Master V120",
+    "source_module": "caring-sharing-autonomous-saas-master-v120",
+    "usage_summary": "AI copilots, decisioning, memory, autonomous actions, and provider integrations."
+  },
+  {
+    "category_name": "AI & Intelligence",
+    "feature_name": "Intelligent Action Engine V91",
+    "source_module": "caring-sharing-intelligent-action-engine-v91",
+    "usage_summary": "AI copilots, decisioning, memory, autonomous actions, and provider integrations."
+  },
+  {
+    "category_name": "AI & Intelligence",
+    "feature_name": "Intelligent Revenue Engine V85",
+    "source_module": "caring-sharing-intelligent-revenue-engine-v85",
+    "usage_summary": "AI copilots, decisioning, memory, autonomous actions, and provider integrations."
+  },
+  {
+    "category_name": "AI & Intelligence",
+    "feature_name": "Live Openai Api Connector V1112",
+    "source_module": "caring-sharing-live-openai-api-connector-v1112",
+    "usage_summary": "AI copilots, decisioning, memory, autonomous actions, and provider integrations."
+  },
+  {
+    "category_name": "AI & Intelligence",
+    "feature_name": "Openai Decision Provider V1111",
+    "source_module": "caring-sharing-openai-decision-provider-v1111",
+    "usage_summary": "AI copilots, decisioning, memory, autonomous actions, and provider integrations."
+  },
+  {
+    "category_name": "AI & Intelligence",
+    "feature_name": "Paid Ads Autopilot V153",
+    "source_module": "caring-sharing-paid-ads-autopilot-v153",
+    "usage_summary": "AI copilots, decisioning, memory, autonomous actions, and provider integrations."
+  },
+  {
+    "category_name": "AI & Intelligence",
+    "feature_name": "Prompt Governance Cost Control V1114",
+    "source_module": "caring-sharing-prompt-governance-cost-control-v1114",
+    "usage_summary": "AI copilots, decisioning, memory, autonomous actions, and provider integrations."
+  },
+  {
+    "category_name": "AI & Intelligence",
+    "feature_name": "Provider Connectors Memory V106",
+    "source_module": "caring-sharing-provider-connectors-memory-v106",
+    "usage_summary": "AI copilots, decisioning, memory, autonomous actions, and provider integrations."
+  },
+  {
+    "category_name": "AI & Intelligence",
+    "feature_name": "Semantic Memory Reasoning V107",
+    "source_module": "caring-sharing-semantic-memory-reasoning-v107",
+    "usage_summary": "AI copilots, decisioning, memory, autonomous actions, and provider integrations."
+  },
+  {
+    "category_name": "AI & Intelligence",
+    "feature_name": "True Openai Responses V1113",
+    "source_module": "caring-sharing-true-openai-responses-v1113",
+    "usage_summary": "AI copilots, decisioning, memory, autonomous actions, and provider integrations."
+  },
+  {
+    "category_name": "AI & Intelligence",
+    "feature_name": "Self Healing V133",
+    "source_module": "caring-sharing-self-healing-v133",
+    "usage_summary": "AI copilots, decisioning, memory, autonomous actions, and provider integrations."
+  },
+  {
+    "category_name": "Portals & User Experience",
+    "feature_name": "Customer Portal Tenant Login V68",
+    "source_module": "caring-sharing-customer-portal-tenant-login-v68",
+    "usage_summary": "Admin, manager, agent, client-facing screens and portal experiences."
+  },
+  {
+    "category_name": "Portals & User Experience",
+    "feature_name": "Frontend Client Portal V112",
+    "source_module": "caring-sharing-frontend-client-portal-v112",
+    "usage_summary": "Admin, manager, agent, client-facing screens and portal experiences."
+  },
+  {
+    "category_name": "Portals & User Experience",
+    "feature_name": "Platform Embedded Screens V17",
+    "source_module": "caring-sharing-platform-embedded-screens-v17",
+    "usage_summary": "Admin, manager, agent, client-facing screens and portal experiences."
+  },
+  {
+    "category_name": "Portals & User Experience",
+    "feature_name": "Platform Native Screens V18",
+    "source_module": "caring-sharing-platform-native-screens-v18",
+    "usage_summary": "Admin, manager, agent, client-facing screens and portal experiences."
+  },
+  {
+    "category_name": "Platform & Security",
+    "feature_name": "Business Ops Platform Core V10",
+    "source_module": "caring-sharing-business-ops-platform-core-v10",
+    "usage_summary": "Installer, multi-tenant core, data layer, APIs, security, provider integrations."
+  },
+  {
+    "category_name": "Platform & Security",
+    "feature_name": "Hybrid Saas Core V1001",
+    "source_module": "caring-sharing-hybrid-saas-core-v1001",
+    "usage_summary": "Installer, multi-tenant core, data layer, APIs, security, provider integrations."
+  },
+  {
+    "category_name": "Platform & Security",
+    "feature_name": "Live Provider Integrations V104",
+    "source_module": "caring-sharing-live-provider-integrations-v104",
+    "usage_summary": "Installer, multi-tenant core, data layer, APIs, security, provider integrations."
+  },
+  {
+    "category_name": "Platform & Security",
+    "feature_name": "Platform Api Auth Webhooks V31",
+    "source_module": "caring-sharing-platform-api-auth-webhooks-v31",
+    "usage_summary": "Installer, multi-tenant core, data layer, APIs, security, provider integrations."
+  },
+  {
+    "category_name": "Platform & Security",
+    "feature_name": "Platform Api Layer V30",
+    "source_module": "caring-sharing-platform-api-layer-v30",
+    "usage_summary": "Installer, multi-tenant core, data layer, APIs, security, provider integrations."
+  },
+  {
+    "category_name": "Platform & Security",
+    "feature_name": "Platform Data Layer V20",
+    "source_module": "caring-sharing-platform-data-layer-v20",
+    "usage_summary": "Installer, multi-tenant core, data layer, APIs, security, provider integrations."
+  },
+  {
+    "category_name": "Platform & Security",
+    "feature_name": "Platform Data Migration Tools V21",
+    "source_module": "caring-sharing-platform-data-migration-tools-v21",
+    "usage_summary": "Installer, multi-tenant core, data layer, APIs, security, provider integrations."
+  },
+  {
+    "category_name": "Platform & Security",
+    "feature_name": "Platform Live Mount V16",
+    "source_module": "caring-sharing-platform-live-mount-v16",
+    "usage_summary": "Installer, multi-tenant core, data layer, APIs, security, provider integrations."
+  },
+  {
+    "category_name": "Platform & Security",
+    "feature_name": "Platform Users Module Merge V15",
+    "source_module": "caring-sharing-platform-users-module-merge-v15",
+    "usage_summary": "Installer, multi-tenant core, data layer, APIs, security, provider integrations."
+  },
+  {
+    "category_name": "Platform & Security",
+    "feature_name": "Production Hardening Launch Kit V70",
+    "source_module": "caring-sharing-production-hardening-launch-kit-v70",
+    "usage_summary": "Installer, multi-tenant core, data layer, APIs, security, provider integrations."
+  },
+  {
+    "category_name": "Platform & Security",
+    "feature_name": "Production Launch Bundle V130",
+    "source_module": "caring-sharing-production-launch-bundle-v130",
+    "usage_summary": "Installer, multi-tenant core, data layer, APIs, security, provider integrations."
+  },
+  {
+    "category_name": "Platform & Security",
+    "feature_name": "Saas Launch V140",
+    "source_module": "caring-sharing-saas-launch-v140",
+    "usage_summary": "Installer, multi-tenant core, data layer, APIs, security, provider integrations."
+  },
+  {
+    "category_name": "Platform & Security",
+    "feature_name": "Saas Multitenant Hardening V113",
+    "source_module": "caring-sharing-saas-multitenant-hardening-v113",
+    "usage_summary": "Installer, multi-tenant core, data layer, APIs, security, provider integrations."
+  },
+  {
+    "category_name": "Platform & Security",
+    "feature_name": "Saas Multitenant V60",
+    "source_module": "caring-sharing-saas-multitenant-v60",
+    "usage_summary": "Installer, multi-tenant core, data layer, APIs, security, provider integrations."
+  },
+  {
+    "category_name": "Platform & Security",
+    "feature_name": "Tenant Aware Core V61",
+    "source_module": "caring-sharing-tenant-aware-core-v61",
+    "usage_summary": "Installer, multi-tenant core, data layer, APIs, security, provider integrations."
+  },
+  {
+    "category_name": "Platform & Security",
+    "feature_name": "Patched Plugins Bundle",
+    "source_module": "patched_plugins_bundle",
+    "usage_summary": "Installer, multi-tenant core, data layer, APIs, security, provider integrations."
+  },
+  {
+    "category_name": "Platform & Security",
+    "feature_name": "Full System Merge V121",
+    "source_module": "caring-sharing-full-system-merge-v121",
+    "usage_summary": "Installer, multi-tenant core, data layer, APIs, security, provider integrations."
+  },
+  {
+    "category_name": "Operations & Administration",
+    "feature_name": "Admin Console V73",
+    "source_module": "caring-sharing-admin-console-v73",
+    "usage_summary": "Admin operations, live ops, alerts, incident handling, and executive control."
+  },
+  {
+    "category_name": "Operations & Administration",
+    "feature_name": "Alerting Incident Response V79",
+    "source_module": "caring-sharing-alerting-incident-response-v79",
+    "usage_summary": "Admin operations, live ops, alerts, incident handling, and executive control."
+  },
+  {
+    "category_name": "Operations & Administration",
+    "feature_name": "Alerts V132",
+    "source_module": "caring-sharing-alerts-v132",
+    "usage_summary": "Admin operations, live ops, alerts, incident handling, and executive control."
+  },
+  {
+    "category_name": "Operations & Administration",
+    "feature_name": "Executive Control Tower V95",
+    "source_module": "caring-sharing-executive-control-tower-v95",
+    "usage_summary": "Admin operations, live ops, alerts, incident handling, and executive control."
+  },
+  {
+    "category_name": "Operations & Administration",
+    "feature_name": "Executive Ops Center V80",
+    "source_module": "caring-sharing-executive-ops-center-v80",
+    "usage_summary": "Admin operations, live ops, alerts, incident handling, and executive control."
+  },
+  {
+    "category_name": "Operations & Administration",
+    "feature_name": "Live Ops V131",
+    "source_module": "caring-sharing-live-ops-v131",
+    "usage_summary": "Admin operations, live ops, alerts, incident handling, and executive control."
+  },
+  {
+    "category_name": "Operations & Administration",
+    "feature_name": "Executive Autonomy Command Center V109",
+    "source_module": "caring-sharing-executive-autonomy-command-center-v109",
+    "usage_summary": "Admin operations, live ops, alerts, incident handling, and executive control."
+  },
+  {
+    "category_name": "Operations & Administration",
+    "feature_name": "Unified Command Center V53",
+    "source_module": "caring-sharing-unified-command-center-v53",
+    "usage_summary": "Admin operations, live ops, alerts, incident handling, and executive control."
+  }
+]
