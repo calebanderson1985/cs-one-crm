@@ -33,6 +33,9 @@ use App\Controllers\WorkflowController;
 use App\Controllers\WebhookEventController;
 use App\Controllers\QueueOpsController;
 use App\Controllers\DiagnosticsController;
+use App\Controllers\AnnouncementController;
+use App\Controllers\MaintenanceController;
+use App\Controllers\OpsConsoleController;
 
 $page = $_GET['page'] ?? 'dashboard';
 
@@ -68,6 +71,9 @@ $routes = [
     'webhooks' => [WebhookEventController::class, 'index'],
     'queue_ops' => [QueueOpsController::class, 'index'],
     'diagnostics' => [DiagnosticsController::class, 'index'],
+    'announcements' => [AnnouncementController::class, 'index'],
+    'maintenance' => [MaintenanceController::class, 'index'],
+    'ops_console' => [OpsConsoleController::class, 'index'],
 ];
 
 if (!isset($routes[$page])) {

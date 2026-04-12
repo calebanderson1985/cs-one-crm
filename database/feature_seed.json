@@ -802,5 +802,23 @@
     "feature_name": "Unified Command Center V53",
     "source_module": "caring-sharing-unified-command-center-v53",
     "usage_summary": "Admin operations, live ops, alerts, incident handling, and executive control."
+  },
+  {
+    "module_key": "announcements",
+    "module_name": "Announcements",
+    "category_name": "Administration",
+    "description": "Broadcast internal announcements"
+  },
+  {
+    "module_key": "maintenance",
+    "module_name": "Maintenance Center",
+    "category_name": "Administration",
+    "description": "Retention cleanup and snapshots"
+  },
+  {
+    "module_key": "ops_console",
+    "module_name": "Ops Console",
+    "category_name": "Administration",
+    "description": "Integration tests and worker monitoring"
   }
 ]

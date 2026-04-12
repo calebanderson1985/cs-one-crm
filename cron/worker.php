@@ -31,6 +31,11 @@ foreach ($companyIds as $companyId) {
         'workflow_jobs' => $workflowResults,
         'message_jobs' => $messageResults,
     ];
+    (new App\Models\WorkerHeartbeat($pdo))->upsert('cron-worker', [
+        'status_text' => 'ok',
+        'workflow_jobs' => $workflowResults,
+        'message_jobs' => $messageResults,
+    ]);
 }
 
 echo json_encode([
