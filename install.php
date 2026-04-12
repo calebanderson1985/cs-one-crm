@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $adminPassword = $_POST['admin_password'] ?? '';
     $tenantName = trim($_POST['tenant_name'] ?? 'Default Tenant');
     $tenantKey = trim($_POST['tenant_key'] ?? 'default-tenant');
-    $appName = trim($_POST['app_name'] ?? 'CS One CRM Phase 6');
+    $appName = trim($_POST['app_name'] ?? 'CS One CRM Phase 9');
     $emailFrom = trim($_POST['email_from_address'] ?? 'noreply@example.com');
     $seedDemo = !empty($_POST['seed_demo']);
 
@@ -58,6 +58,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'ai_api_key' => '',
             'api_token' => bin2hex(random_bytes(16)),
             'worker_batch_size' => '25',
+            'stripe_mode' => 'test',
+            'stripe_public_key' => '',
+            'stripe_secret_key' => '',
+            'stripe_webhook_secret' => '',
+            'billing_checkout_success_url' => '',
+            'billing_checkout_cancel_url' => '',
         ];
         $settingStmt = $pdo->prepare('INSERT INTO system_settings (company_id, setting_key, setting_value, updated_at) VALUES (?,?,?,NOW()) ON DUPLICATE KEY UPDATE setting_value=VALUES(setting_value), updated_at=VALUES(updated_at)');
         foreach ($settings as $key => $value) {
@@ -83,4 +89,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = $e->getMessage();
     }
 }
-?><!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Install CS One CRM Phase 6</title><link rel="stylesheet" href="public/assets/css/app.css"></head><body><main class="content content--full"><div class="card narrow"><h2>Install CS One CRM Phase 6</h2><?php if ($error): ?><div class="alert"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></div><?php endif; ?><?php if ($success): ?><p>Installation completed.</p><p><a href="public/index.php?page=login">Go to login</a></p><?php else: ?><form method="post" class="stack-form"><input name="host" value="localhost" placeholder="DB Host"><input name="port" value="3306" placeholder="DB Port"><input name="database" required placeholder="Database"><input name="username" required placeholder="DB Username"><input type="password" name="password" placeholder="DB Password"><input name="tenant_name" value="Default Tenant" placeholder="Tenant / Company Name"><input name="tenant_key" value="default-tenant" placeholder="Tenant Key"><input name="app_name" value="CS One CRM Phase 6" placeholder="Application Name"><input name="email_from_address" value="noreply@example.com" placeholder="Default From Address"><input name="admin_name" required placeholder="Admin Name"><input type="email" name="admin_email" required placeholder="Admin Email"><input type="password" name="admin_password" required placeholder="Admin Password"><label><input type="checkbox" name="seed_demo" value="1" checked> Seed demo data</label><button type="submit">Install System</button></form><?php endif; ?></div></main></body></html>
+?><!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Install CS One CRM Phase 9</title><link rel="stylesheet" href="public/assets/css/app.css"></head><body><main class="content content--full"><div class="card narrow"><h2>Install CS One CRM Phase 9</h2><?php if ($error): ?><div class="alert"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></div><?php endif; ?><?php if ($success): ?><p>Installation completed.</p><p><a href="public/index.php?page=login">Go to login</a></p><?php else: ?><form method="post" class="stack-form"><input name="host" value="localhost" placeholder="DB Host"><input name="port" value="3306" placeholder="DB Port"><input name="database" required placeholder="Database"><input name="username" required placeholder="DB Username"><input type="password" name="password" placeholder="DB Password"><input name="tenant_name" value="Default Tenant" placeholder="Tenant / Company Name"><input name="tenant_key" value="default-tenant" placeholder="Tenant Key"><input name="app_name" value="CS One CRM Phase 9" placeholder="Application Name"><input name="email_from_address" value="noreply@example.com" placeholder="Default From Address"><input name="admin_name" required placeholder="Admin Name"><input type="email" name="admin_email" required placeholder="Admin Email"><input type="password" name="admin_password" required placeholder="Admin Password"><label><input type="checkbox" name="seed_demo" value="1" checked> Seed demo data</label><button type="submit">Install System</button></form><?php endif; ?></div></main></body></html>

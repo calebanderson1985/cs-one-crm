@@ -4,7 +4,7 @@ $currentUser = Auth::user();
 $page = $_GET['page'] ?? 'dashboard';
 $success = flash('success');
 $error = flash('error');
-$appName = $GLOBALS['pdo'] instanceof PDO ? setting($GLOBALS['pdo'], 'app_name', 'CS One CRM Phase 6') : 'CS One CRM Phase 6';
+$appName = $GLOBALS['pdo'] instanceof PDO ? setting($GLOBALS['pdo'], 'app_name', 'CS One CRM Phase 9') : 'CS One CRM Phase 9';
 ?>
 <!doctype html>
 <html lang="en">
@@ -45,7 +45,9 @@ $appName = $GLOBALS['pdo'] instanceof PDO ? setting($GLOBALS['pdo'], 'app_name',
             <?php if (Auth::canAccess('users')): ?><a class="<?= active_nav($page, 'users') ?>" href="index.php?page=users">User Management</a><?php endif; ?>
             <?php if (Auth::canAccess('permissions')): ?><a class="<?= active_nav($page, 'permissions') ?>" href="index.php?page=permissions">Permissions</a><?php endif; ?>
             <?php if (Auth::canAccess('audit')): ?><a class="<?= active_nav($page, 'audit') ?>" href="index.php?page=audit">Audit Trail</a><?php endif; ?>
-            <?php if (Auth::canAccess('api')): ?><a class="<?= active_nav($page, 'api') ?>" href="api.php?resource=clients&token=change-me">API</a><?php endif; ?>
+            <?php if (Auth::canAccess('api')): ?><a class="<?= active_nav($page, 'api') ?>" href="index.php?page=api">API</a><?php endif; ?>
+            <?php if (Auth::canAccess('tokens')): ?><a class="<?= active_nav($page, 'tokens') ?>" href="index.php?page=tokens">API Tokens</a><?php endif; ?>
+            <?php if (Auth::canAccess('onboarding')): ?><a class="<?= active_nav($page, 'onboarding') ?>" href="index.php?page=onboarding">Launch Wizard</a><?php endif; ?>
             <?php if (Auth::canAccess('features')): ?><a class="<?= active_nav($page, 'features') ?>" href="index.php?page=features">Feature Registry</a><?php endif; ?>
             <?php if (Auth::canAccess('settings')): ?><a class="<?= active_nav($page, 'settings') ?>" href="index.php?page=settings">System Settings</a><?php endif; ?>
             <a href="index.php?page=logout">Logout</a>

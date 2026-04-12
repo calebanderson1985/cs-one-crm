@@ -9,7 +9,7 @@ class BaseModel {
     protected array $tenantScopedTables = [
         'users','clients','leads','deals','communications','tasks','commissions','documents','audit_logs',
         'notifications','workflows','workflow_runs','workflow_queue','role_permissions','communication_templates',
-        'outbound_messages','ai_logs'
+        'outbound_messages','ai_logs','api_tokens','onboarding_steps'
     ];
 
     protected array $ownerColumns = [

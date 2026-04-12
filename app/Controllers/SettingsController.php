@@ -28,6 +28,12 @@ class SettingsController {
                 'ai_api_key' => $_POST['ai_api_key'] ?? '',
                 'api_token' => $_POST['api_token'] ?? 'change-me',
                 'worker_batch_size' => $_POST['worker_batch_size'] ?? '25',
+                'stripe_mode' => $_POST['stripe_mode'] ?? 'test',
+                'stripe_public_key' => $_POST['stripe_public_key'] ?? '',
+                'stripe_secret_key' => $_POST['stripe_secret_key'] ?? '',
+                'stripe_webhook_secret' => $_POST['stripe_webhook_secret'] ?? '',
+                'billing_checkout_success_url' => $_POST['billing_checkout_success_url'] ?? '',
+                'billing_checkout_cancel_url' => $_POST['billing_checkout_cancel_url'] ?? '',
             ]);
             audit_log($this->db, 'settings', 'update', null, 'System settings updated');
             flash('success', 'Settings saved.');

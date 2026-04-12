@@ -95,3 +95,15 @@ INSERT INTO notifications (company_id, user_id, title, message_text, level_name,
 (@company_id,@admin_user_id,'Welcome to Phase 6','Communications, workflow engine, RBAC, API, and AI workspace are active.','success','index.php?page=dashboard',0,NOW()),
 (@company_id,@agent_user_id,'Deal entered negotiation','Blue Ridge Expansion needs follow-up.','warning','index.php?page=deals',0,NOW()),
 (@company_id,@client_user_id,'New portal document','A client-facing document is ready to download.','info','index.php?page=documents',0,NOW());
+
+
+INSERT INTO onboarding_steps (company_id, step_key, title, description_text, is_complete, sort_order, completed_by, completed_at, created_at, updated_at) VALUES
+(@company_id,'brand_setup','Brand setup','Confirm app name, branding, and support details.',1,10,@admin_user_id,NOW(),NOW(),NOW()),
+(@company_id,'communications','Communications','Configure email and SMS providers.',1,20,@admin_user_id,NOW(),NOW(),NOW()),
+(@company_id,'permissions','Permissions','Review role matrix and access scope.',0,30,NULL,NULL,NOW(),NOW()),
+(@company_id,'team_setup','Team setup','Create managers, agents, and client portal users.',1,40,@admin_user_id,NOW(),NOW(),NOW()),
+(@company_id,'api_tokens','API tokens','Generate scoped API credentials.',0,50,NULL,NULL,NOW(),NOW()),
+(@company_id,'launch_review','Launch review','Validate billing, webhooks, and worker.',0,60,NULL,NULL,NOW(),NOW());
+
+INSERT INTO api_tokens (company_id, token_name, token_prefix, token_hash, scope_text, expires_at, last_used_at, revoked_at, created_by, created_at, updated_at) VALUES
+(@company_id,'Demo Integration','demo12345678',SHA2('phase9-demo-token', 256),'clients:read,leads:read,deals:read,tasks:read,communications:read',NULL,NULL,NULL,@admin_user_id,NOW(),NOW());

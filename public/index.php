@@ -7,6 +7,8 @@ if (!isset($pdo)) {
 
 use App\Controllers\AdminController;
 use App\Controllers\AiController;
+use App\Controllers\ApiTokenController;
+use App\Controllers\OnboardingController;
 use App\Controllers\ApiController;
 use App\Controllers\AuditController;
 use App\Controllers\AuthController;
@@ -54,6 +56,8 @@ $routes = [
     'users' => [UserController::class, 'index'],
     'permissions' => [PermissionController::class, 'index'],
     'ai' => [AiController::class, 'index'],
+    'tokens' => [ApiTokenController::class, 'index'],
+    'onboarding' => [OnboardingController::class, 'index'],
 ];
 
 if (!isset($routes[$page])) {
