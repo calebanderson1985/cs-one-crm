@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 
+use App\Models\ApiRequestLog;
 use App\Models\ApiToken;
 use App\Models\Client;
 use App\Models\Deal;
@@ -51,6 +52,15 @@ Authorization: Bearer YOUR_TOKEN</div><p><a href="index.php?page=tokens">Manage 
                 default => throw new \RuntimeException('Method not allowed', 405),
             };
             audit_log($this->db, 'api', strtolower($method), $id ?: null, 'API ' . strtolower($method) . ' for ' . $module);
+            (new ApiRequestLog($this->db))->log([
+                'api_token_id' => $tokenInfo['token_id'] ?? null,
+                'resource_name' => $resource,
+                'http_method' => $method,
+                'status_code' => 200,
+                'request_path' => $_SERVER['REQUEST_URI'] ?? '/api.php',
+                'ip_address' => $_SERVER['REMOTE_ADDR'] ?? null,
+                'scope_text' => $tokenInfo['scopes'] ?? '',
+            ]);
             $payload['meta'] = [
                 'resource' => $resource,
                 'method' => $method,
@@ -80,7 +90,7 @@ Authorization: Bearer YOUR_TOKEN</div><p><a href="index.php?page=tokens">Manage 
                     json_response(['error' => 'Token scope does not allow this operation'], 403);
                 }
                 $apiTokens->touchUsage((int)$row['id']);
-                return ['mode' => 'scoped_token', 'company_id' => (int)$row['company_id'], 'scopes' => (string)$row['scope_text']];
+                return ['mode' => 'scoped_token', 'company_id' => (int)$row['company_id'], 'scopes' => (string)$row['scope_text'], 'token_id' => (int)$row['id']];
             }
         }
 
@@ -88,7 +98,7 @@ Authorization: Bearer YOUR_TOKEN</div><p><a href="index.php?page=tokens">Manage 
         $this->resolveCompanyFromLegacyToken((string)$legacyToken);
         $expected = setting($this->db, 'api_token', 'change-me');
         if ($legacyToken && hash_equals((string)$expected, (string)$legacyToken)) {
-            return ['mode' => 'legacy_token', 'company_id' => current_company_id(), 'scopes' => '*'];
+            return ['mode' => 'legacy_token', 'company_id' => current_company_id(), 'scopes' => '*', 'token_id' => null];
         }
         json_response(['error' => 'Unauthorized'], 401);
     }

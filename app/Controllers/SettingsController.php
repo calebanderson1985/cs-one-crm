@@ -34,6 +34,7 @@ class SettingsController {
                 'stripe_webhook_secret' => $_POST['stripe_webhook_secret'] ?? '',
                 'billing_checkout_success_url' => $_POST['billing_checkout_success_url'] ?? '',
                 'billing_checkout_cancel_url' => $_POST['billing_checkout_cancel_url'] ?? '',
+                'login_rate_limit' => $_POST['login_rate_limit'] ?? '5',
             ]);
             audit_log($this->db, 'settings', 'update', null, 'System settings updated');
             flash('success', 'Settings saved.');

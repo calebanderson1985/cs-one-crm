@@ -58,6 +58,9 @@ function verify_csrf(): void {
 }
 
 function current_company_id(): int {
+    if (!empty($_SESSION['impersonated_company_id'])) {
+        return (int) $_SESSION['impersonated_company_id'];
+    }
     if (!empty($_SESSION['user']['company_id'])) {
         return (int) $_SESSION['user']['company_id'];
     }
@@ -185,4 +188,13 @@ function audit_log(PDO $db, string $module, string $action, ?int $recordId = nul
         $summary,
         $_SERVER['REMOTE_ADDR'] ?? null,
     ]);
+}
+
+
+function current_base_company_id(): int {
+    return (int) ($_SESSION['user']['company_id'] ?? 1);
+}
+
+function is_super_admin(): bool {
+    return current_user_role() === 'admin' && current_base_company_id() === 1;
 }

@@ -27,3 +27,10 @@ php scripts/migrate.php
 ```
 
 This applies forward-only SQL files from `database/migrations`.
+
+
+## Phase 10 deployment notes
+
+- Run `php scripts/migrate.php` after upgrading.
+- Set `stripe_webhook_secret` before enabling live billing webhooks.
+- Restrict the company switch page to trusted super admins only.

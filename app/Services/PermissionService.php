@@ -12,7 +12,7 @@ class PermissionService {
         return [
             'dashboard', 'clients', 'leads', 'deals', 'tasks', 'communications', 'documents',
             'commissions', 'reports', 'workflows', 'notifications', 'portals', 'users', 'audit',
-            'features', 'settings', 'api', 'permissions', 'ai', 'tokens', 'onboarding'
+            'features', 'settings', 'api', 'permissions', 'ai', 'tokens', 'onboarding', 'api_analytics', 'company_switch'
         ];
     }
 
@@ -46,6 +46,8 @@ class PermissionService {
                 'ai' => ['view' => 1, 'create' => 1, 'edit' => 0, 'delete' => 0],
                 'tokens' => ['view' => 0, 'create' => 0, 'edit' => 0, 'delete' => 0],
                 'onboarding' => ['view' => 1, 'create' => 0, 'edit' => 1, 'delete' => 0],
+                'api_analytics' => ['view' => 0, 'create' => 0, 'edit' => 0, 'delete' => 0],
+                'company_switch' => ['view' => 0, 'create' => 0, 'edit' => 0, 'delete' => 0],
             ],
             'agent' => [
                 'dashboard' => ['view' => 1, 'create' => 0, 'edit' => 0, 'delete' => 0],
@@ -69,6 +71,8 @@ class PermissionService {
                 'ai' => ['view' => 1, 'create' => 1, 'edit' => 0, 'delete' => 0],
                 'tokens' => ['view' => 0, 'create' => 0, 'edit' => 0, 'delete' => 0],
                 'onboarding' => ['view' => 1, 'create' => 0, 'edit' => 1, 'delete' => 0],
+                'api_analytics' => ['view' => 0, 'create' => 0, 'edit' => 0, 'delete' => 0],
+                'company_switch' => ['view' => 0, 'create' => 0, 'edit' => 0, 'delete' => 0],
             ],
             'client' => [
                 'dashboard' => ['view' => 1, 'create' => 0, 'edit' => 0, 'delete' => 0],
@@ -92,6 +96,8 @@ class PermissionService {
                 'ai' => ['view' => 0, 'create' => 0, 'edit' => 0, 'delete' => 0],
                 'tokens' => ['view' => 0, 'create' => 0, 'edit' => 0, 'delete' => 0],
                 'onboarding' => ['view' => 0, 'create' => 0, 'edit' => 0, 'delete' => 0],
+                'api_analytics' => ['view' => 0, 'create' => 0, 'edit' => 0, 'delete' => 0],
+                'company_switch' => ['view' => 0, 'create' => 0, 'edit' => 0, 'delete' => 0],
             ],
         ];
     }

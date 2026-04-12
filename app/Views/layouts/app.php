@@ -4,7 +4,7 @@ $currentUser = Auth::user();
 $page = $_GET['page'] ?? 'dashboard';
 $success = flash('success');
 $error = flash('error');
-$appName = $GLOBALS['pdo'] instanceof PDO ? setting($GLOBALS['pdo'], 'app_name', 'CS One CRM Phase 9') : 'CS One CRM Phase 9';
+$appName = $GLOBALS['pdo'] instanceof PDO ? setting($GLOBALS['pdo'], 'app_name', 'CS One CRM Phase 10') : 'CS One CRM Phase 10';
 ?>
 <!doctype html>
 <html lang="en">
@@ -47,6 +47,8 @@ $appName = $GLOBALS['pdo'] instanceof PDO ? setting($GLOBALS['pdo'], 'app_name',
             <?php if (Auth::canAccess('audit')): ?><a class="<?= active_nav($page, 'audit') ?>" href="index.php?page=audit">Audit Trail</a><?php endif; ?>
             <?php if (Auth::canAccess('api')): ?><a class="<?= active_nav($page, 'api') ?>" href="index.php?page=api">API</a><?php endif; ?>
             <?php if (Auth::canAccess('tokens')): ?><a class="<?= active_nav($page, 'tokens') ?>" href="index.php?page=tokens">API Tokens</a><?php endif; ?>
+            <?php if (Auth::canAccess('api_analytics')): ?><a class="<?= active_nav($page, 'api_analytics') ?>" href="index.php?page=api_analytics">API Analytics</a><?php endif; ?>
+            <?php if (Auth::canAccess('company_switch') && is_super_admin()): ?><a class="<?= active_nav($page, 'company_switch') ?>" href="index.php?page=company_switch">Company Switch</a><?php endif; ?>
             <?php if (Auth::canAccess('onboarding')): ?><a class="<?= active_nav($page, 'onboarding') ?>" href="index.php?page=onboarding">Launch Wizard</a><?php endif; ?>
             <?php if (Auth::canAccess('features')): ?><a class="<?= active_nav($page, 'features') ?>" href="index.php?page=features">Feature Registry</a><?php endif; ?>
             <?php if (Auth::canAccess('settings')): ?><a class="<?= active_nav($page, 'settings') ?>" href="index.php?page=settings">System Settings</a><?php endif; ?>
