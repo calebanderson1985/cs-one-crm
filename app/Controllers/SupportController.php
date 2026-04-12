@@ -6,6 +6,7 @@ use App\Core\View;
 use App\Models\Notification;
 use App\Models\SupportTicket;
 use App\Models\User;
+use App\Models\SlaPolicy;
 
 class SupportController {
     public function __construct(private \PDO $db) {}
@@ -51,6 +52,7 @@ class SupportController {
         ];
         $tickets = $model->list($filters);
         $users = (new User($this->db))->list();
-        View::render('admin/support', compact('tickets', 'filters', 'users'));
+        $slaPolicies = (new SlaPolicy($this->db))->listActive();
+        View::render('admin/support', compact('tickets', 'filters', 'users', 'slaPolicies'));
     }
 }
