@@ -4,7 +4,7 @@ $currentUser = Auth::user();
 $page = $_GET['page'] ?? 'dashboard';
 $success = flash('success');
 $error = flash('error');
-$appName = $GLOBALS['pdo'] instanceof PDO ? setting($GLOBALS['pdo'], 'app_name', 'CS One CRM Phase 10') : 'CS One CRM Phase 10';
+$appName = $GLOBALS['pdo'] instanceof PDO ? setting($GLOBALS['pdo'], 'app_name', 'CS One CRM Phase 13') : 'CS One CRM Phase 13';
 ?>
 <!doctype html>
 <html lang="en">
@@ -51,6 +51,9 @@ $appName = $GLOBALS['pdo'] instanceof PDO ? setting($GLOBALS['pdo'], 'app_name',
             <?php if (Auth::canAccess('queue_ops')): ?><a class="<?= active_nav($page, 'queue_ops') ?>" href="index.php?page=queue_ops">Queue Operations</a><?php endif; ?>
             <?php if (Auth::canAccess('webhooks')): ?><a class="<?= active_nav($page, 'webhooks') ?>" href="index.php?page=webhooks">Webhook Events</a><?php endif; ?>
             <?php if (Auth::canAccess('diagnostics')): ?><a class="<?= active_nav($page, 'diagnostics') ?>" href="index.php?page=diagnostics">Diagnostics</a><?php endif; ?>
+            <?php if (Auth::canAccess('ops_console')): ?><a class="<?= active_nav($page, 'ops_console') ?>" href="index.php?page=ops_console">Ops Console</a><?php endif; ?>
+            <?php if (Auth::canAccess('announcements')): ?><a class="<?= active_nav($page, 'announcements') ?>" href="index.php?page=announcements">Announcements</a><?php endif; ?>
+            <?php if (Auth::canAccess('maintenance')): ?><a class="<?= active_nav($page, 'maintenance') ?>" href="index.php?page=maintenance">Maintenance Center</a><?php endif; ?>
             <?php if (Auth::canAccess('company_switch') && is_super_admin()): ?><a class="<?= active_nav($page, 'company_switch') ?>" href="index.php?page=company_switch">Company Switch</a><?php endif; ?>
             <?php if (Auth::canAccess('onboarding')): ?><a class="<?= active_nav($page, 'onboarding') ?>" href="index.php?page=onboarding">Launch Wizard</a><?php endif; ?>
             <?php if (Auth::canAccess('features')): ?><a class="<?= active_nav($page, 'features') ?>" href="index.php?page=features">Feature Registry</a><?php endif; ?>

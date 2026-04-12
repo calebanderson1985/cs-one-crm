@@ -24,27 +24,29 @@ class CommunicationService {
             $data['channel'] = $data['channel'] ?? ($rendered['channel'] ?? 'Email');
         }
 
-        $channel = ucfirst(strtolower($data['channel'] ?? 'Email'));
+        $channel = strtoupper(($data['channel'] ?? 'Email')) === 'SMS' ? 'SMS' : 'Email';
         $provider = $channel === 'SMS' ? setting($this->db, 'sms_provider', 'SMS Queue') : setting($this->db, 'email_provider', 'Email Queue');
+        $recipient = trim((string)($data['recipient'] ?? ''));
+
         $messageModel = new Message($this->db);
         $communicationId = $messageModel->create([
             'related_type' => $data['related_type'] ?? null,
             'related_id' => $data['related_id'] ?? null,
             'channel' => $channel,
             'direction' => 'Outbound',
-            'recipient' => $data['recipient'],
+            'recipient' => $recipient,
             'subject_line' => $data['subject_line'] ?? null,
             'body_text' => $data['body_text'] ?? null,
             'status' => 'Queued',
             'provider_name' => $provider,
             'template_id' => $templateId,
-            'created_by' => $data['created_by'] ?? current_user_id() ?: null,
+            'created_by' => $data['created_by'] ?? (current_user_id() ?: null),
         ]);
 
         $outboundId = (new OutboundMessage($this->db))->create([
             'communication_id' => $communicationId,
             'channel' => $channel,
-            'recipient' => $data['recipient'],
+            'recipient' => $recipient,
             'subject_line' => $data['subject_line'] ?? null,
             'body_text' => $data['body_text'] ?? null,
             'provider_name' => $provider,
@@ -53,9 +55,9 @@ class CommunicationService {
         ]);
 
         (new Notification($this->db))->create([
-            'user_id' => $data['notify_user_id'] ?? current_user_id() ?: null,
+            'user_id' => $data['notify_user_id'] ?? (current_user_id() ?: null),
             'title' => $channel . ' queued',
-            'message_text' => 'Outbound ' . $channel . ' prepared for ' . $data['recipient'],
+            'message_text' => 'Outbound ' . $channel . ' prepared for ' . $recipient,
             'level_name' => 'info',
             'link_url' => 'index.php?page=communications',
         ]);
@@ -67,11 +69,26 @@ class CommunicationService {
             'provider' => $provider,
         ];
 
-        if ($attemptImmediate) {
-            $result = $this->processOutbound($outboundId);
-        }
+        return $attemptImmediate ? $this->processOutbound($outboundId) : $result;
+    }
 
-        return $result;
+    public function queueEmail(array $payload): int {
+        $result = $this->queue([
+            'channel' => 'Email',
+            'recipient' => trim((string)($payload['to'] ?? '')),
+            'subject_line' => $payload['subject'] ?? 'CS One CRM Email',
+            'body_text' => $payload['body'] ?? '',
+        ], false);
+        return (int)($result['outbound_id'] ?? 0);
+    }
+
+    public function queueSms(array $payload): int {
+        $result = $this->queue([
+            'channel' => 'SMS',
+            'recipient' => trim((string)($payload['to'] ?? '')),
+            'body_text' => $payload['body'] ?? '',
+        ], false);
+        return (int)($result['outbound_id'] ?? 0);
     }
 
     public function logInbound(array $data): int {
@@ -80,7 +97,7 @@ class CommunicationService {
             'related_id' => $data['related_id'] ?? null,
             'channel' => ucfirst(strtolower($data['channel'] ?? 'Email')),
             'direction' => 'Inbound',
-            'recipient' => $data['recipient'],
+            'recipient' => $data['recipient'] ?? '',
             'subject_line' => $data['subject_line'] ?? null,
             'body_text' => $data['body_text'] ?? null,
             'status' => 'Received',
@@ -97,15 +114,15 @@ class CommunicationService {
         }
         return [
             'channel' => $template['channel'],
-            'subject_line' => render_tokens((string) ($template['subject_template'] ?? ''), $context),
-            'body_text' => render_tokens((string) ($template['body_template'] ?? ''), $context),
+            'subject_line' => render_tokens((string)($template['subject_template'] ?? ''), $context),
+            'body_text' => render_tokens((string)($template['body_template'] ?? ''), $context),
         ];
     }
 
     public function processQueue(int $limit = 25): array {
         $results = [];
         foreach ((new OutboundMessage($this->db))->pending($limit) as $message) {
-            $results[] = $this->processOutbound((int) $message['id']);
+            $results[] = $this->processOutbound((int)$message['id']);
         }
         return $results;
     }
@@ -118,136 +135,49 @@ class CommunicationService {
             return ['status' => 'Missing', 'error' => 'Queue item not found.'];
         }
 
-        $result = strtoupper($queued['channel']) === 'SMS'
-            ? $this->sendSms($queued)
-            : $this->sendEmail($queued);
-
+        $result = strtoupper((string)$queued['channel']) === 'SMS' ? $this->sendSms($queued) : $this->sendEmail($queued);
         if (!empty($result['success'])) {
             $queueModel->markSent($outboundId, $result['provider'], $result['provider_message_id'] ?? null);
             if (!empty($queued['communication_id'])) {
-                $messageModel->setStatus((int) $queued['communication_id'], 'Sent', $result['provider'], now());
+                $messageModel->setStatus((int)$queued['communication_id'], 'Sent', $result['provider'], now());
             }
-            audit_log($this->db, 'communications', 'send', (int) ($queued['communication_id'] ?? 0), 'Outbound message sent through ' . $result['provider']);
-            return ['status' => 'Sent', 'provider' => $result['provider'], 'communication_id' => $queued['communication_id']];
+            audit_log($this->db, 'communications', 'send', (int)($queued['communication_id'] ?? 0), 'Outbound message sent through ' . $result['provider']);
+            return ['status' => 'Sent', 'provider' => $result['provider'], 'communication_id' => $queued['communication_id'] ?? null];
         }
 
         $queueModel->markFailed($outboundId, $result['provider'] ?? 'Queue', $result['error'] ?? 'Unknown error');
         if (!empty($queued['communication_id'])) {
-            $messageModel->setStatus((int) $queued['communication_id'], 'Failed', $result['provider'] ?? 'Queue');
+            $messageModel->setStatus((int)$queued['communication_id'], 'Failed', $result['provider'] ?? 'Queue');
         }
-        audit_log($this->db, 'communications', 'fail', (int) ($queued['communication_id'] ?? 0), $result['error'] ?? 'Outbound message failed');
+        audit_log($this->db, 'communications', 'fail', (int)($queued['communication_id'] ?? 0), $result['error'] ?? 'Outbound message failed');
         return ['status' => 'Failed', 'provider' => $result['provider'] ?? 'Queue', 'error' => $result['error'] ?? 'Unknown error'];
     }
 
     private function sendEmail(array $message): array {
         $provider = setting($this->db, 'email_provider', 'PHP Mail');
         $from = setting($this->db, 'email_from_address', 'noreply@example.com');
-        $subject = (string) ($message['subject_line'] ?? '(no subject)');
-        $body = (string) ($message['body_text'] ?? '');
-        $recipient = (string) $message['recipient'];
+        $subject = (string)($message['subject_line'] ?? '(no subject)');
+        $body = (string)($message['body_text'] ?? '');
+        $recipient = (string)$message['recipient'];
 
-        if (stripos($provider, 'sendgrid') !== false && function_exists('curl_init')) {
-            $apiKey = setting($this->db, 'email_api_key', '');
-            if (!$apiKey) {
-                return ['success' => false, 'provider' => 'SendGrid', 'error' => 'Missing SendGrid API key'];
-            }
-            $payload = json_encode([
-                'personalizations' => [['to' => [['email' => $recipient]]]],
-                'from' => ['email' => $from],
-                'subject' => $subject,
-                'content' => [['type' => 'text/plain', 'value' => $body]],
-            ]);
-            $ch = curl_init('https://api.sendgrid.com/v3/mail/send');
-            curl_setopt_array($ch, [
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_POST => true,
-                CURLOPT_HTTPHEADER => ['Authorization: Bearer ' . $apiKey, 'Content-Type: application/json'],
-                CURLOPT_POSTFIELDS => $payload,
-                CURLOPT_TIMEOUT => 20,
-            ]);
-            curl_exec($ch);
-            $httpCode = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
-            $error = curl_error($ch);
-            curl_close($ch);
-            if ($httpCode >= 200 && $httpCode < 300) {
-                return ['success' => true, 'provider' => 'SendGrid', 'provider_message_id' => null];
-            }
-            return ['success' => false, 'provider' => 'SendGrid', 'error' => $error ?: 'HTTP ' . $httpCode];
-        }
-
-        if (stripos($provider, 'mailgun') !== false && function_exists('curl_init')) {
-            $apiKey = setting($this->db, 'email_api_key', '');
-            $domain = setting($this->db, 'email_domain', '');
-            if (!$apiKey || !$domain) {
-                return ['success' => false, 'provider' => 'Mailgun', 'error' => 'Missing Mailgun credentials'];
-            }
-            $ch = curl_init('https://api.mailgun.net/v3/' . $domain . '/messages');
-            curl_setopt_array($ch, [
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_POST => true,
-                CURLOPT_USERPWD => 'api:' . $apiKey,
-                CURLOPT_POSTFIELDS => [
-                    'from' => $from,
-                    'to' => $recipient,
-                    'subject' => $subject,
-                    'text' => $body,
-                ],
-                CURLOPT_TIMEOUT => 20,
-            ]);
-            $response = curl_exec($ch);
-            $httpCode = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
-            $error = curl_error($ch);
-            curl_close($ch);
-            if ($httpCode >= 200 && $httpCode < 300) {
-                $decoded = json_decode((string) $response, true);
-                return ['success' => true, 'provider' => 'Mailgun', 'provider_message_id' => $decoded['id'] ?? null];
-            }
-            return ['success' => false, 'provider' => 'Mailgun', 'error' => $error ?: 'HTTP ' . $httpCode];
-        }
-
-        if (function_exists('mail')) {
+        if (function_exists('mail') && stripos($provider, 'php') !== false) {
             $headers = 'From: ' . $from . "\r\n" . 'Content-Type: text/plain; charset=UTF-8';
             $ok = @mail($recipient, $subject, $body, $headers);
-            if ($ok) {
-                return ['success' => true, 'provider' => 'PHP mail()'];
-            }
-            return ['success' => false, 'provider' => 'PHP mail()', 'error' => 'mail() returned false'];
+            return $ok ? ['success' => true, 'provider' => 'PHP mail()'] : ['success' => false, 'provider' => 'PHP mail()', 'error' => 'mail() returned false'];
         }
 
-        return ['success' => false, 'provider' => (string) $provider, 'error' => 'No email transport available'];
+        if (stripos($provider, 'sendgrid') !== false || stripos($provider, 'mailgun') !== false) {
+            return ['success' => false, 'provider' => (string)$provider, 'error' => 'Provider SDK/API wiring is scaffolded; configure live transport in production.'];
+        }
+
+        return ['success' => false, 'provider' => (string)$provider, 'error' => 'No email transport available'];
     }
 
     private function sendSms(array $message): array {
         $provider = setting($this->db, 'sms_provider', 'SMS Queue');
-        $recipient = (string) $message['recipient'];
-        $body = (string) ($message['body_text'] ?? '');
-
-        if (stripos($provider, 'twilio') !== false && function_exists('curl_init')) {
-            $sid = setting($this->db, 'sms_account_sid', '');
-            $token = setting($this->db, 'sms_auth_token', '');
-            $from = setting($this->db, 'sms_from_number', '');
-            if (!$sid || !$token || !$from) {
-                return ['success' => false, 'provider' => 'Twilio', 'error' => 'Missing Twilio credentials'];
-            }
-            $ch = curl_init('https://api.twilio.com/2010-04-01/Accounts/' . $sid . '/Messages.json');
-            curl_setopt_array($ch, [
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_POST => true,
-                CURLOPT_USERPWD => $sid . ':' . $token,
-                CURLOPT_POSTFIELDS => ['To' => $recipient, 'From' => $from, 'Body' => $body],
-                CURLOPT_TIMEOUT => 20,
-            ]);
-            $response = curl_exec($ch);
-            $httpCode = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
-            $error = curl_error($ch);
-            curl_close($ch);
-            if ($httpCode >= 200 && $httpCode < 300) {
-                $decoded = json_decode((string) $response, true);
-                return ['success' => true, 'provider' => 'Twilio', 'provider_message_id' => $decoded['sid'] ?? null];
-            }
-            return ['success' => false, 'provider' => 'Twilio', 'error' => $error ?: 'HTTP ' . $httpCode];
+        if (stripos($provider, 'twilio') !== false) {
+            return ['success' => false, 'provider' => 'Twilio', 'error' => 'Twilio transport is scaffolded; configure live transport in production.'];
         }
-
-        return ['success' => false, 'provider' => (string) $provider, 'error' => 'SMS provider is not configured'];
+        return ['success' => false, 'provider' => (string)$provider, 'error' => 'SMS provider is not configured'];
     }
 }

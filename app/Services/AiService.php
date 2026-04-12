@@ -24,16 +24,16 @@ class AiService {
         if (($lead['source_name'] ?? '') === 'Referral') { $score += 20; $reasons[] = 'came from a referral'; }
         if (($lead['source_name'] ?? '') === 'Website') { $score += 8; $reasons[] = 'came from the website'; }
         $stageWeights = ['New' => 5, 'Contacted' => 15, 'Qualified' => 25, 'Proposal' => 35, 'Converted' => 50];
-        $score += $stageWeights[$lead['stage']] ?? 0;
-        $reasons[] = 'is currently in stage ' . $lead['stage'];
-        if (!empty($lead['notes']) && strlen((string) $lead['notes']) > 40) { $score += 10; $reasons[] = 'contains meaningful notes'; }
+        $score += $stageWeights[$lead['stage'] ?? 'New'] ?? 0;
+        $reasons[] = 'is currently in stage ' . ($lead['stage'] ?? 'New');
+        if (!empty($lead['notes']) && strlen((string)$lead['notes']) > 40) { $score += 10; $reasons[] = 'contains meaningful notes'; }
         $score = max(0, min(100, $score));
 
         $leadModel->setScore($leadId, $score);
         $explanation = 'Lead score ' . $score . '/100 because it ' . implode(', ', $reasons) . '.';
         (new AiLog($this->db))->create([
             'tool_name' => 'lead_score',
-            'input_text' => json_encode(['lead_id' => $leadId, 'lead_name' => $lead['lead_name']]),
+            'input_text' => json_encode(['lead_id' => $leadId, 'lead_name' => $lead['lead_name'] ?? '']),
             'output_text' => $explanation,
         ]);
 
@@ -51,14 +51,14 @@ class AiService {
         $dealStats = $dealStmt->fetch() ?: ['total' => 0, 'value_total' => 0];
         $taskStmt = $this->db->prepare('SELECT COUNT(*) FROM tasks WHERE company_id = ? AND related_type = ? AND related_name = ?');
         $taskStmt->execute([$companyId, 'Client', $client['company_name']]);
-        $taskCount = (int) $taskStmt->fetchColumn();
+        $taskCount = (int)$taskStmt->fetchColumn();
         $commStmt = $this->db->prepare('SELECT COUNT(*) FROM communications WHERE company_id = ? AND ((related_type = ? AND related_id = ?) OR recipient = ?)');
         $commStmt->execute([$companyId, 'Client', $clientId, $client['email']]);
-        $commCount = (int) $commStmt->fetchColumn();
+        $commCount = (int)$commStmt->fetchColumn();
 
         $summary = $client['company_name'] . ' is currently marked ' . $client['status'] . ' with primary contact ' . $client['contact_name'] . '. ' .
-            'There are ' . (int) $dealStats['total'] . ' linked deals worth ' . money($dealStats['value_total']) . ', ' . $taskCount . ' related tasks, and ' . $commCount . ' communication records. ' .
-            (!empty($client['notes']) ? 'Notes highlight: ' . trim((string) $client['notes']) : 'No major notes are recorded yet.');
+            'There are ' . (int)$dealStats['total'] . ' linked deals worth ' . money($dealStats['value_total']) . ', ' . $taskCount . ' related tasks, and ' . $commCount . ' communication records. ' .
+            (!empty($client['notes']) ? 'Notes highlight: ' . trim((string)$client['notes']) : 'No major notes are recorded yet.');
 
         (new AiLog($this->db))->create([
             'tool_name' => 'client_summary',
@@ -93,5 +93,15 @@ class AiService {
         ]);
 
         return ['subject' => $subject, 'body' => $body];
+    }
+
+    public function generate(string $action, string $prompt, array $context = []): string {
+        $response = '[AI:' . $action . '] ' . trim($prompt);
+        (new AiLog($this->db))->create([
+            'tool_name' => $action,
+            'input_text' => json_encode(['prompt' => $prompt, 'context' => $context]),
+            'output_text' => $response,
+        ]);
+        return $response;
     }
 }
