@@ -9,8 +9,10 @@ use App\Controllers\AdminController;
 use App\Controllers\AiController;
 use App\Controllers\ApiTokenController;
 use App\Controllers\OnboardingController;
+use App\Controllers\ApiAnalyticsController;
 use App\Controllers\ApiController;
 use App\Controllers\AuditController;
+use App\Controllers\CompanySwitchController;
 use App\Controllers\AuthController;
 use App\Controllers\ClientController;
 use App\Controllers\CommissionController;
@@ -58,6 +60,8 @@ $routes = [
     'ai' => [AiController::class, 'index'],
     'tokens' => [ApiTokenController::class, 'index'],
     'onboarding' => [OnboardingController::class, 'index'],
+    'api_analytics' => [ApiAnalyticsController::class, 'index'],
+    'company_switch' => [CompanySwitchController::class, 'index'],
 ];
 
 if (!isset($routes[$page])) {
