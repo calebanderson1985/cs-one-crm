@@ -12,7 +12,7 @@ class PermissionService {
         return [
             'dashboard', 'clients', 'leads', 'deals', 'tasks', 'communications', 'documents',
             'commissions', 'reports', 'workflows', 'notifications', 'portals', 'users', 'audit',
-            'features', 'settings', 'api', 'permissions', 'ai'
+            'features', 'settings', 'api', 'permissions', 'ai', 'branding', 'billing', 'onboarding'
         ];
     }
 
@@ -44,6 +44,9 @@ class PermissionService {
                 'api' => ['view' => 0, 'create' => 0, 'edit' => 0, 'delete' => 0],
                 'permissions' => ['view' => 0, 'create' => 0, 'edit' => 0, 'delete' => 0],
                 'ai' => ['view' => 1, 'create' => 1, 'edit' => 0, 'delete' => 0],
+                'branding' => ['view' => 1, 'create' => 0, 'edit' => 0, 'delete' => 0],
+                'billing' => ['view' => 1, 'create' => 0, 'edit' => 0, 'delete' => 0],
+                'onboarding' => ['view' => 1, 'create' => 0, 'edit' => 1, 'delete' => 0],
             ],
             'agent' => [
                 'dashboard' => ['view' => 1, 'create' => 0, 'edit' => 0, 'delete' => 0],
@@ -65,6 +68,9 @@ class PermissionService {
                 'api' => ['view' => 0, 'create' => 0, 'edit' => 0, 'delete' => 0],
                 'permissions' => ['view' => 0, 'create' => 0, 'edit' => 0, 'delete' => 0],
                 'ai' => ['view' => 1, 'create' => 1, 'edit' => 0, 'delete' => 0],
+                'branding' => ['view' => 0, 'create' => 0, 'edit' => 0, 'delete' => 0],
+                'billing' => ['view' => 0, 'create' => 0, 'edit' => 0, 'delete' => 0],
+                'onboarding' => ['view' => 0, 'create' => 0, 'edit' => 0, 'delete' => 0],
             ],
             'client' => [
                 'dashboard' => ['view' => 1, 'create' => 0, 'edit' => 0, 'delete' => 0],
@@ -86,6 +92,9 @@ class PermissionService {
                 'api' => ['view' => 0, 'create' => 0, 'edit' => 0, 'delete' => 0],
                 'permissions' => ['view' => 0, 'create' => 0, 'edit' => 0, 'delete' => 0],
                 'ai' => ['view' => 0, 'create' => 0, 'edit' => 0, 'delete' => 0],
+                'branding' => ['view' => 0, 'create' => 0, 'edit' => 0, 'delete' => 0],
+                'billing' => ['view' => 0, 'create' => 0, 'edit' => 0, 'delete' => 0],
+                'onboarding' => ['view' => 0, 'create' => 0, 'edit' => 0, 'delete' => 0],
             ],
         ];
     }

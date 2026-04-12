@@ -1,10 +1,8 @@
-# Roadmap After Phase 6
+# Roadmap After Phase 7
 
-This repository contains the latest recoverable codebase from the live build session: **Phase 6**.
+This repository now contains the **Phase 7** build.
 
-The original session later planned and described additional work for Phase 7 and Phase 8. Those later packages were not recoverable from the expired runtime, so this document preserves the intended scope for the next implementation cycles.
-
-## Phase 7 target scope
+## Phase 7 completed scope
 - White-label branding settings
 - Subscription and billing center
 - Onboarding / go-live checklist
@@ -19,6 +17,5 @@ The original session later planned and described additional work for Phase 7 and
 - Saved report builder
 
 ## Recommended next implementation order
-1. Build Phase 7 features on top of this repo.
-2. Add Phase 8 token and company administration.
-3. Follow with Phase 9 for production hardening, live billing, and onboarding automation.
+1. Add Phase 8 token and company administration.
+2. Follow with Phase 9 for production hardening, live billing, and onboarding automation.

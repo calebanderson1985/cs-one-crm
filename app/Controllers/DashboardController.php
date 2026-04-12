@@ -7,9 +7,12 @@ use App\Models\AiLog;
 use App\Models\Client;
 use App\Models\Commission;
 use App\Models\Deal;
+use App\Models\Invoice;
 use App\Models\Lead;
 use App\Models\Notification;
+use App\Models\OnboardingItem;
 use App\Models\OutboundMessage;
+use App\Models\Subscription;
 use App\Models\Task;
 use App\Models\User;
 use App\Models\WorkflowRun;
@@ -31,6 +34,9 @@ class DashboardController {
         $outboundQueue = array_slice((new OutboundMessage($this->db))->list(), 0, 8);
         $aiLogs = (new AiLog($this->db))->list(6);
         $workflowQueue = (new WorkflowEngine($this->db))->queueSnapshot(8);
+        $subscription = (new Subscription($this->db))->getCurrent();
+        $invoices = (new Invoice($this->db))->list();
+        $onboardingPercent = (new OnboardingItem($this->db))->completionPercent();
 
         $openDealValue = 0.0;
         $pipeline = [];
@@ -59,9 +65,15 @@ class DashboardController {
             'workflow_queue' => count($workflowQueue),
             'outbound_queue' => count(array_filter($outboundQueue, fn ($row) => in_array(($row['send_status'] ?? ''), ['Queued', 'Retry'], true))),
             'ai_activity' => count($aiLogs),
+            'subscription_status' => $subscription['subscription_status'] ?? 'Trial',
+            'subscription_plan' => $subscription['plan_name'] ?? 'Growth',
+            'subscription_mrr' => (float) ($subscription['monthly_amount'] ?? 0),
+            'onboarding_percent' => $onboardingPercent,
+            'invoice_open_total' => array_sum(array_map(fn ($row) => ($row['invoice_status'] ?? '') !== 'Paid' ? (float) $row['amount'] : 0.0, $invoices)),
         ];
 
         $recentLeads = array_slice($leads, 0, 5);
-        View::render('dashboard/index', compact('stats', 'pipeline', 'recentLeads', 'workflowRuns', 'outboundQueue', 'workflowQueue', 'aiLogs'));
+        $recentInvoices = array_slice($invoices, 0, 5);
+        View::render('dashboard/index', compact('stats', 'pipeline', 'recentLeads', 'workflowRuns', 'outboundQueue', 'workflowQueue', 'aiLogs', 'subscription', 'recentInvoices'));
     }
 }

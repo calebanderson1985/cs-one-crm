@@ -3,7 +3,14 @@
 CS One CRM is an all-in-one PHP/MySQL CRM foundation designed to consolidate CRM core, communications, workflows, AI utilities, reporting, commissions, portals, and admin operations into one installable web application.
 
 ## Current repository baseline
-This repository is based on the latest recoverable build from the session: **Phase 6**.
+This repository now contains **Phase 7**.
+
+## What Phase 7 adds
+- White-label branding settings
+- Subscription and billing center
+- Onboarding / go-live checklist
+- Deployment tooling and health endpoint
+- More polished commercial admin shell
 
 ## Included modules
 - CRM Core: clients, leads, deals, tasks
@@ -14,6 +21,9 @@ This repository is based on the latest recoverable build from the session: **Pha
 - AI Workspace for summaries, drafts, and lead scoring
 - Documents
 - Notifications
+- Branding Center
+- Subscription & Billing Center
+- Onboarding Center
 - Admin, Manager, Agent, and Client portal shell
 - Role-based permissions and starter tenant isolation
 - API entrypoint for CRM resources
@@ -39,10 +49,11 @@ bootstrap.php   App bootstrap
 
 ## Quick start
 1. Clone this repository.
-2. Copy `.env.example` to `.env` and fill in your local values.
+2. Copy `.env.example` to `.env` for your own deployment notes if desired.
 3. Create an empty MySQL database.
 4. Open `install.php` in your browser.
 5. Log in at `public/index.php?page=login`.
+6. Visit Branding, Billing, and Onboarding to finish go-live setup.
 
 ## Background worker
 Process workflows and outbound communications:
@@ -57,5 +68,9 @@ Process a single company only:
 php cron/worker.php 1
 ```
 
-## Important note
-Phase 7 and Phase 8 were planned after this build in the original session, but their generated packages were not recoverable once the runtime expired. Their intended scope is preserved in `docs/ROADMAP_PHASE7_8.md`.
+## Health endpoint
+Check service readiness:
+
+```text
+/public/health.php
+```

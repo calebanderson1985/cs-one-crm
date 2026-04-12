@@ -10,6 +10,8 @@ use App\Controllers\AiController;
 use App\Controllers\ApiController;
 use App\Controllers\AuditController;
 use App\Controllers\AuthController;
+use App\Controllers\BillingController;
+use App\Controllers\BrandingController;
 use App\Controllers\ClientController;
 use App\Controllers\CommissionController;
 use App\Controllers\CommunicationController;
@@ -18,6 +20,7 @@ use App\Controllers\DealController;
 use App\Controllers\DocumentController;
 use App\Controllers\LeadController;
 use App\Controllers\NotificationController;
+use App\Controllers\OnboardingController;
 use App\Controllers\PasswordController;
 use App\Controllers\PermissionController;
 use App\Controllers\PortalController;
@@ -54,6 +57,9 @@ $routes = [
     'users' => [UserController::class, 'index'],
     'permissions' => [PermissionController::class, 'index'],
     'ai' => [AiController::class, 'index'],
+    'branding' => [BrandingController::class, 'index'],
+    'billing' => [BillingController::class, 'index'],
+    'onboarding' => [OnboardingController::class, 'index'],
 ];
 
 if (!isset($routes[$page])) {
