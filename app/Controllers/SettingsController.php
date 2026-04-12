@@ -42,6 +42,10 @@ class SettingsController {
                 'password_policy_require_number' => $_POST['password_policy_require_number'] ?? '1',
                 'password_policy_require_symbol' => $_POST['password_policy_require_symbol'] ?? '0',
                 'api_rate_limit_per_minute' => $_POST['api_rate_limit_per_minute'] ?? '60',
+                'retention_audit_days' => $_POST['retention_audit_days'] ?? setting($this->db, 'retention_audit_days', '180'),
+                'retention_api_days' => $_POST['retention_api_days'] ?? setting($this->db, 'retention_api_days', '90'),
+                'retention_webhook_days' => $_POST['retention_webhook_days'] ?? setting($this->db, 'retention_webhook_days', '30'),
+                'retention_outbound_days' => $_POST['retention_outbound_days'] ?? setting($this->db, 'retention_outbound_days', '60'),
             ]);
             audit_log($this->db, 'settings', 'update', null, 'System settings updated');
             flash('success', 'Settings saved.');
