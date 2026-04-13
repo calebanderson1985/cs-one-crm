@@ -5,6 +5,8 @@ use App\Models\Notification;
 use App\Models\SupportEmailIngestion;
 use App\Models\SupportTicket;
 use App\Models\SupportTicketComment;
+use App\Models\SupportTicketAttachment;
+use App\Services\AttachmentScanService;
 use PDO;
 
 class SupportEmailIngestionService {
@@ -80,6 +82,13 @@ class SupportEmailIngestionService {
             'thread_ref' => $ticket['thread_ref'] ?? ($messageId ?: null),
             'system_user_id' => null,
         ]);
+
+        foreach ((array)($payload['attachments'] ?? []) as $attachment) {
+            $attachmentId = (new SupportTicketAttachment($this->db))->createFromPayload($ticketId, $commentId, (array)$attachment, 'email_ingest');
+            if ($attachmentId) {
+                (new AttachmentScanService($this->db))->queueSupportAttachment($attachmentId);
+            }
+        }
 
         (new CommunicationService($this->db))->logInbound([
             'related_type' => 'SupportTicket',
