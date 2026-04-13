@@ -362,6 +362,7 @@ CREATE TABLE IF NOT EXISTS onboarding_steps (
     step_key VARCHAR(120) NOT NULL,
     title VARCHAR(190) NOT NULL,
     description_text TEXT NULL,
+    action_url VARCHAR(255) NULL,
     is_complete TINYINT(1) NOT NULL DEFAULT 0,
     sort_order INT NOT NULL DEFAULT 0,
     completed_by INT NULL,
@@ -370,6 +371,19 @@ CREATE TABLE IF NOT EXISTS onboarding_steps (
     updated_at DATETIME NOT NULL,
     UNIQUE KEY uniq_onboarding_company_step (company_id, step_key),
     INDEX idx_onboarding_company (company_id)
+);
+
+CREATE TABLE IF NOT EXISTS login_attempts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    company_id INT NULL,
+    user_id INT NULL,
+    email VARCHAR(190) NOT NULL,
+    ip_address VARCHAR(45) NULL,
+    success_flag TINYINT(1) NOT NULL DEFAULT 0,
+    created_at DATETIME NOT NULL,
+    INDEX idx_login_attempts_email (email),
+    INDEX idx_login_attempts_ip (ip_address),
+    INDEX idx_login_attempts_created (created_at)
 );
 
 
@@ -434,6 +448,12 @@ CREATE TABLE IF NOT EXISTS support_tickets (
     status_name VARCHAR(30) NOT NULL DEFAULT 'Open',
     owner_user_id INT NULL,
     detail_text TEXT NULL,
+    requester_name VARCHAR(190) NULL,
+    requester_email VARCHAR(190) NULL,
+    source_channel VARCHAR(30) NOT NULL DEFAULT 'Web',
+    thread_ref VARCHAR(190) NULL,
+    last_inbound_at DATETIME NULL,
+    last_outbound_at DATETIME NULL,
     created_by INT NULL,
     sla_policy_id INT NULL,
     response_due_at DATETIME NULL,
@@ -442,6 +462,8 @@ CREATE TABLE IF NOT EXISTS support_tickets (
     created_at DATETIME NOT NULL,
     updated_at DATETIME NOT NULL,
     INDEX idx_support_company (company_id),
+    INDEX idx_support_requester (company_id, requester_email),
+    INDEX idx_support_thread (company_id, thread_ref),
     INDEX idx_support_status (status_name),
     INDEX idx_support_owner (owner_user_id)
 );
@@ -473,4 +495,58 @@ CREATE TABLE IF NOT EXISTS knowledge_base_articles (
     updated_at DATETIME NOT NULL,
     INDEX idx_kb_company (company_id),
     INDEX idx_kb_visibility (company_id, visibility_scope, is_published)
+);
+
+
+CREATE TABLE IF NOT EXISTS support_ticket_comments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    company_id INT NOT NULL,
+    ticket_id INT NOT NULL,
+    user_id INT NULL,
+    parent_comment_id INT NULL,
+    visibility_scope VARCHAR(20) NOT NULL DEFAULT 'internal',
+    message_direction VARCHAR(20) NOT NULL DEFAULT 'internal',
+    message_source VARCHAR(20) NOT NULL DEFAULT 'web',
+    source_message_id VARCHAR(190) NULL,
+    sender_name VARCHAR(190) NULL,
+    sender_email VARCHAR(190) NULL,
+    thread_ref VARCHAR(190) NULL,
+    comment_text TEXT NOT NULL,
+    created_at DATETIME NOT NULL,
+    KEY idx_support_ticket_comments_company_ticket (company_id, ticket_id),
+    KEY idx_support_ticket_comments_user (user_id),
+    KEY idx_support_ticket_comments_parent (company_id, parent_comment_id),
+    KEY idx_support_ticket_comments_message (company_id, source_message_id)
+);
+
+CREATE TABLE IF NOT EXISTS support_email_ingestions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    company_id INT NOT NULL,
+    ticket_id INT NULL,
+    from_email VARCHAR(190) NOT NULL,
+    subject_line VARCHAR(255) NULL,
+    source_message_id VARCHAR(190) NULL,
+    status_name VARCHAR(30) NOT NULL DEFAULT 'Processed',
+    notes_text TEXT NULL,
+    created_at DATETIME NOT NULL,
+    KEY idx_support_email_ingestions_company (company_id, created_at),
+    KEY idx_support_email_ingestions_message (company_id, source_message_id)
+);
+
+CREATE TABLE IF NOT EXISTS support_escalation_rules (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    company_id INT NOT NULL,
+    rule_name VARCHAR(190) NOT NULL,
+    priority_name VARCHAR(50) NULL,
+    category_name VARCHAR(120) NULL,
+    hours_after_breach INT NOT NULL DEFAULT 0,
+    escalate_to_user_id INT NULL,
+    set_priority_name VARCHAR(50) NULL,
+    set_status_name VARCHAR(50) NOT NULL DEFAULT 'Escalated',
+    comment_template TEXT NULL,
+    is_active TINYINT(1) NOT NULL DEFAULT 1,
+    sort_order INT NOT NULL DEFAULT 100,
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
+    KEY idx_support_escalation_rules_company (company_id, is_active, sort_order)
 );

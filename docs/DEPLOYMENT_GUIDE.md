@@ -1,38 +1,23 @@
-# CS One CRM Phase 13 Deployment Guide
+# CS One CRM Phase 16 Deployment Guide
 
-## Requirements
-- PHP 8.0+
-- MySQL 8+
-- PDO MySQL enabled
-- writable `storage/` directory
+## Upgrade steps
+1. Deploy the Phase 16 codebase.
+2. Run `php scripts/migrate.php`.
+3. Confirm the new tables exist:
+   - `support_ticket_comments`
+   - `support_escalation_rules`
+4. Keep cron running for support escalations:
+   - `php cron/worker.php`
+5. Review SLA escalation rules in the admin UI.
 
-## Install
-1. Copy files to the server.
-2. Create `config/database.php` from `config/database.example.php` or `.env` conventions used by your environment.
-3. Open `install.php` for a fresh install.
-4. For upgrades, run:
-   - `php scripts/migrate.php`
-
-## Worker setup
-Schedule the worker:
-
-```bash
-php cron/worker.php
-```
-
-The worker now records a heartbeat in `worker_heartbeats`, which the Ops Console displays.
-
-## Maintenance
-Use the Maintenance Center in the app or automate cleanups later with a cron wrapper around application logic.
+## Operational notes
+- Auto-escalation depends on the cron worker.
+- Client-visible comments are stored separately from internal notes but on the same ticket.
+- Help Center visibility depends on article `visibility_scope='client'` and `is_published=1`.
 
 
-## Phase 14 additions
-- Support Center
-- Audit filters and CSV export
-- Company suspension/reactivation controls
-
-
-## Phase 15 additions
-- SLA Policies
-- Knowledge Base
-- Support tickets can now carry SLA due dates and breach visibility.
+## Phase 17 email ingestion
+- Expose `public/email_ingest.php` behind HTTPS.
+- Send a bearer token or `X-INGEST-TOKEN` header matching the `support_ingest_token` setting.
+- Pass `company_id`, `from_email`, `subject`, `body_text`, and optional `message_id`/`in_reply_to`.
+- Use `php scripts/migrate.php` before enabling inbound email in an upgraded environment.

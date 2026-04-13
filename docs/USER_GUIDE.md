@@ -1,34 +1,38 @@
-# CS One CRM Phase 13 User Guide
+# CS One CRM Phase 16 User Guide
 
-## New in Phase 13
+## New in Phase 16
+- Add internal or client-visible comments to support tickets.
+- Create escalation rules under **SLA Policies & Escalation Rules**.
+- Run `php scripts/migrate.php` after upgrade, then keep the cron worker active so overdue tickets can auto-escalate.
+- Client users now see a simplified **Help Center** experience for published client-facing knowledge-base articles.
 
-### Announcements
-Use **Administration → Announcements** to publish a message to the company, admins, managers, or agents. Publishing creates notifications for matching users.
+## Support ticket comments
+1. Open **Support Center**.
+2. Create or open a ticket row.
+3. Use the comment form in the Actions column.
+4. Choose **Internal** for staff-only notes or **Client Visible** for help-center-safe updates.
+5. Save the comment.
 
-### Maintenance Center
-Use **Administration → Maintenance Center** to:
-- save retention settings
-- run cleanup for old audit/API/webhook/outbound records
-- create a JSON snapshot of current tenant settings in `storage/snapshots`
+## Escalation rules
+1. Open **SLA Policies**.
+2. In **Create Escalation Rule**, define the matching priority/category.
+3. Set how many hours after breach the rule should apply.
+4. Optionally assign a new owner, priority, or status.
+5. Add the comment template that should be written when the escalation runs.
+6. Save the rule.
 
-### Ops Console
-Use **Administration → Ops Console** to:
-- queue a test email
-- queue a test SMS
-- run a quick AI test prompt
-- review worker heartbeat freshness
+## Auto-escalation processing
+- The cron worker now processes workflow queue, outbound communications, and overdue support escalation checks.
+- Example: `php cron/worker.php`
+- When a rule fires, the ticket is updated, a comment is written, and the assigned owner receives a notification.
 
-## Existing modules
-Phase 13 keeps all Phase 12 CRM, workflow, billing scaffold, webhook, diagnostics, queue, and API features intact.
-
-
-## Phase 14 additions
-- Support Center
-- Audit filters and CSV export
-- Company suspension/reactivation controls
+## Help Center
+- Client users only see published client-facing articles.
+- Staff users can still create, edit, publish, and delete articles from the same screen.
 
 
-## Phase 15 additions
-- SLA Policies
-- Knowledge Base
-- Support tickets can now carry SLA due dates and breach visibility.
+## Phase 17
+- Support Center now supports threaded ticket replies.
+- Queue an email reply to the requester directly from a ticket reply form.
+- Inbound email can create new tickets or append replies through `public/email_ingest.php`.
+- Configure the inbound endpoint with the `support_ingest_token` setting.

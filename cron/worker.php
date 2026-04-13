@@ -26,10 +26,12 @@ foreach ($companyIds as $companyId) {
     $batchSize = (int) setting($pdo, 'worker_batch_size', '25');
     $workflowResults = (new App\Services\WorkflowEngine($pdo))->processQueue($batchSize);
     $messageResults = (new App\Services\CommunicationService($pdo))->processQueue($batchSize);
+    $supportResults = (new App\Services\SupportEscalationService($pdo))->process();
     $summary[] = [
         'company_id' => $companyId,
         'workflow_jobs' => $workflowResults,
         'message_jobs' => $messageResults,
+        'support_escalations' => $supportResults,
     ];
     (new App\Models\WorkerHeartbeat($pdo))->upsert('cron-worker', [
         'status_text' => 'ok',
