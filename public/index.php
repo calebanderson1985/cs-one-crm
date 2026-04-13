@@ -39,6 +39,8 @@ use App\Controllers\OpsConsoleController;
 use App\Controllers\SupportController;
 use App\Controllers\KnowledgeBaseController;
 use App\Controllers\SlaController;
+use App\Controllers\SupportPortalController;
+use App\Controllers\SupportAttachmentController;
 
 $page = $_GET['page'] ?? 'dashboard';
 
@@ -80,6 +82,8 @@ $routes = [
     'support' => [SupportController::class, 'index'],
     'knowledge_base' => [KnowledgeBaseController::class, 'index'],
     'sla' => [SlaController::class, 'index'],
+    'support_portal' => [SupportPortalController::class, 'index'],
+    'support_attachment' => [SupportAttachmentController::class, 'download'],
 ];
 
 if (!isset($routes[$page])) {

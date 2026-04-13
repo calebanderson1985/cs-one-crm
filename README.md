@@ -1,28 +1,28 @@
-## Phase 18 installable hotfix package
+# CS One CRM Phase 19
 
-This build is a refreshed installable package based on the latest recoverable Phase 17 repo with the critical Phase 18 install/auth hotfixes integrated.
+Phase 19 extends the installable CRM with:
+- provider-native mailbox polling scaffolding via IMAP
+- inbound support attachment ingestion and scan logging
+- a client-facing support reply portal
+- a more business-oriented login experience and application shell
+- richer client profile fields so records feel like CRM accounts, not a compact contact list
 
-Included fixes:
-- installer compatibility for mixed feature seed formats
-- feature_categories seeding with category_name
-- login_attempts schema repair and auth-safe LoginAttempt model
-- onboarding_steps action_url schema repair
-- onboarding default-step upserts to avoid duplicate key failures
+## Fresh install
+1. Upload the package.
+2. Visit `/install.php`.
+3. Complete database setup.
 
----
+## Upgrading
+Run:
 
-# CS One CRM - Phase 17
+```bash
+php scripts/migrate.php
+```
 
-A PHP/MySQL multi-tenant CRM platform with CRM core, communications, workflows, AI hooks, API tokens, diagnostics, queue operations, support governance, and Phase 17 conversation features.
+## New endpoints
+- `public/email_ingest.php`
+- `public/mailbox_poll.php`
+- `public/support_attachment.php` via `index.php?page=support_attachment&id=...`
 
-## Phase 17 additions
-- threaded support ticket conversations
-- email-to-ticket ingestion endpoint
-- queued email replies from ticket threads
-- inbound email logging against support tickets
-
-## Run locally
-- configure database
-- run `install.php` for fresh install or `php scripts/migrate.php` for upgrades
-- serve `public/` through your web server
-- post inbound email payloads to `public/email_ingest.php` with the `support_ingest_token`
+## New cron
+- `cron/mailbox_poll.php`
