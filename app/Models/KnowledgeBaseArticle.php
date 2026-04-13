@@ -18,6 +18,13 @@ class KnowledgeBaseArticle extends BaseModel {
     }
 
 
+
+    public function listClientVisible(): array {
+        $stmt = $this->db->prepare("SELECT * FROM knowledge_base_articles WHERE company_id = ? AND visibility_scope = 'client' AND is_published = 1 ORDER BY category_name ASC, title ASC");
+        $stmt->execute([current_company_id()]);
+        return $stmt->fetchAll();
+    }
+
     public function categorySummary(array $filters = []): array {
         $clauses = ['company_id = ?'];
         $params = [current_company_id()];
