@@ -17,6 +17,23 @@ class KnowledgeBaseArticle extends BaseModel {
         return $stmt->fetchAll();
     }
 
+
+    public function categorySummary(array $filters = []): array {
+        $clauses = ['company_id = ?'];
+        $params = [current_company_id()];
+        if (current_user_role() === 'client') {
+            $clauses[] = "visibility_scope = 'client' AND is_published = 1";
+        }
+        if (!empty($filters['q'])) {
+            $clauses[] = '(title LIKE ? OR body_text LIKE ? OR category_name LIKE ?)';
+            $like = '%' . $filters['q'] . '%';
+            array_push($params, $like, $like, $like);
+        }
+        $stmt = $this->db->prepare('SELECT category_name, COUNT(*) AS total FROM knowledge_base_articles WHERE ' . implode(' AND ', $clauses) . ' GROUP BY category_name ORDER BY total DESC, category_name ASC');
+        $stmt->execute($params);
+        return $stmt->fetchAll();
+    }
+
     public function create(array $data): int {
         $stmt = $this->db->prepare('INSERT INTO knowledge_base_articles (company_id, title, category_name, visibility_scope, body_text, is_published, created_by, created_at, updated_at) VALUES (?,?,?,?,?,?,?,NOW(),NOW())');
         $stmt->execute([current_company_id(), trim((string)($data['title'] ?? '')), trim((string)($data['category_name'] ?? 'General')), trim((string)($data['visibility_scope'] ?? 'internal')), trim((string)($data['body_text'] ?? '')), !empty($data['is_published']) ? 1 : 0, current_user_id() ?: null]);

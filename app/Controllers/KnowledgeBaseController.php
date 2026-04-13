@@ -39,6 +39,7 @@ class KnowledgeBaseController {
             'q' => trim((string)($_GET['q'] ?? '')),
         ];
         $articles = $model->list($filters);
-        View::render('admin/knowledge_base', compact('articles', 'filters'));
+        $categories = $model->categorySummary($filters);
+        View::render('admin/knowledge_base', compact('articles', 'filters', 'categories'));
     }
 }

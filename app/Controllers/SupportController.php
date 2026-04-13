@@ -7,6 +7,8 @@ use App\Models\Notification;
 use App\Models\SupportTicket;
 use App\Models\User;
 use App\Models\SlaPolicy;
+use App\Models\SupportTicketComment;
+use App\Services\CommunicationService;
 
 class SupportController {
     public function __construct(private \PDO $db) {}
@@ -14,6 +16,7 @@ class SupportController {
     public function index(): void {
         Auth::requirePermission('support', 'view');
         $model = new SupportTicket($this->db);
+        $commentModel = new SupportTicketComment($this->db);
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             verify_csrf();
             $action = $_POST['action'] ?? 'create';
@@ -35,6 +38,40 @@ class SupportController {
                 $model->updateStatus($id, $status);
                 audit_log($this->db, 'support', 'status', $id, 'Support ticket moved to ' . $status);
                 flash('success', 'Support ticket updated.');
+            } elseif ($action === 'comment') {
+                Auth::requirePermission('support', 'edit');
+                $id = (int)($_POST['ticket_id'] ?? 0);
+                $ticket = $model->getById($id);
+                if (!$ticket) {
+                    flash('error', 'Ticket not found.');
+                    redirect('index.php?page=support');
+                }
+                $sendEmail = !empty($_POST['send_email_reply']) && !empty($ticket['requester_email']);
+                $messageId = $sendEmail ? '<ticket-' . $id . '-comment-' . bin2hex(random_bytes(6)) . '@csone.local>' : null;
+                $commentId = $commentModel->createForTicket($id, [
+                    'visibility_scope' => $_POST['visibility_scope'] ?? 'internal',
+                    'comment_text' => $_POST['comment_text'] ?? '',
+                    'parent_comment_id' => (int)($_POST['parent_comment_id'] ?? 0),
+                    'message_direction' => $sendEmail ? 'outbound' : 'internal',
+                    'message_source' => $sendEmail ? 'email' : 'web',
+                    'source_message_id' => $messageId,
+                    'sender_name' => current_user_name(),
+                    'sender_email' => current_user_email(),
+                    'thread_ref' => $ticket['thread_ref'] ?? null,
+                ]);
+                if ($sendEmail) {
+                    (new CommunicationService($this->db))->queue([
+                        'channel' => 'Email',
+                        'recipient' => $ticket['requester_email'],
+                        'subject_line' => '[Ticket #' . $id . '] ' . $ticket['title'],
+                        'body_text' => trim((string)($_POST['comment_text'] ?? '')),
+                        'related_type' => 'SupportTicket',
+                        'related_id' => $id,
+                    ], false);
+                    $model->markOutbound($id);
+                }
+                audit_log($this->db, 'support', 'comment', $id, 'Support ticket comment added');
+                flash('success', $sendEmail ? 'Reply queued and comment added.' : 'Comment added.');
             } elseif ($action === 'delete') {
                 Auth::requirePermission('support', 'delete');
                 $id = (int)($_POST['id'] ?? 0);
@@ -53,6 +90,7 @@ class SupportController {
         $tickets = $model->list($filters);
         $users = (new User($this->db))->list();
         $slaPolicies = (new SlaPolicy($this->db))->listActive();
-        View::render('admin/support', compact('tickets', 'filters', 'users', 'slaPolicies'));
+        $commentsByTicket = $commentModel->groupedForTickets(array_column($tickets, 'id'));
+        View::render('admin/support', compact('tickets', 'filters', 'users', 'slaPolicies', 'commentsByTicket'));
     }
 }
