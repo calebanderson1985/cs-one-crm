@@ -4,7 +4,7 @@ $currentUser = Auth::user();
 $page = $_GET['page'] ?? 'dashboard';
 $success = flash('success');
 $error = flash('error');
-$appName = $GLOBALS['pdo'] instanceof PDO ? setting($GLOBALS['pdo'], 'app_name', 'CS One CRM Phase 15') : 'CS One CRM Phase 15';
+$appName = $GLOBALS['pdo'] instanceof PDO ? setting($GLOBALS['pdo'], 'app_name', 'CS One CRM Phase 16') : 'CS One CRM Phase 16';
 ?>
 <!doctype html>
 <html lang="en">
@@ -56,7 +56,7 @@ $appName = $GLOBALS['pdo'] instanceof PDO ? setting($GLOBALS['pdo'], 'app_name',
             <?php if (Auth::canAccess('maintenance')): ?><a class="<?= active_nav($page, 'maintenance') ?>" href="index.php?page=maintenance">Maintenance Center</a><?php endif; ?>
             <?php if (Auth::canAccess('support')): ?><a class="<?= active_nav($page, 'support') ?>" href="index.php?page=support">Support Center</a><?php endif; ?>
             <?php if (Auth::canAccess('sla')): ?><a class="<?= active_nav($page, 'sla') ?>" href="index.php?page=sla">SLA Policies</a><?php endif; ?>
-            <?php if (Auth::canAccess('knowledge_base')): ?><a class="<?= active_nav($page, 'knowledge_base') ?>" href="index.php?page=knowledge_base">Knowledge Base</a><?php endif; ?>
+            <?php if (Auth::canAccess('knowledge_base')): ?><a class="<?= active_nav($page, 'knowledge_base') ?>" href="index.php?page=knowledge_base"><?= current_user_role() === 'client' ? 'Help Center' : 'Knowledge Base' ?></a><?php endif; ?>
             <?php if (Auth::canAccess('company_switch') && is_super_admin()): ?><a class="<?= active_nav($page, 'company_switch') ?>" href="index.php?page=company_switch">Company Switch</a><?php endif; ?>
             <?php if (Auth::canAccess('onboarding')): ?><a class="<?= active_nav($page, 'onboarding') ?>" href="index.php?page=onboarding">Launch Wizard</a><?php endif; ?>
             <?php if (Auth::canAccess('features')): ?><a class="<?= active_nav($page, 'features') ?>" href="index.php?page=features">Feature Registry</a><?php endif; ?>
